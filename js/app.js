@@ -174,6 +174,38 @@
       bindPress(b, () => cycleEvidence(e.key, false), () => cycleEvidence(e.key, true));
       box.append(b);
     });
+    // 8th cell: ghosts left; tap to jump to the list
+    const n = possible.length;
+    const left = el("button", "qev qcount" + (n === 1 ? " one" : n === 0 ? " zero" : ""));
+    left.append(el("b", null, String(n)), el("span", null, n === 1 ? "ghost" : "left"));
+    left.title = "Jump to the ghost list";
+    left.onclick = () => $("#summary").scrollIntoView({ behavior: "smooth", block: "center" });
+    box.append(left);
+  }
+
+  // "Ruled out: …" / "Back in: …" message so you see what each tap changed.
+  let lastNames = null, toastTimer = null;
+  function announce(possible) {
+    const names = possible.map((g) => g.name);
+    if (lastNames) {
+      const gone = lastNames.filter((x) => !names.includes(x));
+      const back = names.filter((x) => !lastNames.includes(x));
+      const list = (a) => a.slice(0, 5).join(", ") + (a.length > 5 ? ` +${a.length - 5} more` : "");
+      const t = $("#toast");
+      const fullReset = !gone.length && names.length === GHOSTS.length;
+      if (t && !fullReset && (gone.length || back.length)) {
+        t.innerHTML = "";
+        if (gone.length) { const p = el("div", "t-out"); p.append(el("b", null, "Ruled out: "), document.createTextNode(list(gone))); t.append(p); }
+        if (back.length) { const p = el("div", "t-in"); p.append(el("b", null, "Back in: "), document.createTextNode(list(back))); t.append(p); }
+        const c = el("div", "t-left", names.length === 1 ? `Only ${names[0]} left` : `${names.length} left`);
+        t.append(c);
+        t.hidden = false;
+        t.classList.remove("show"); void t.offsetWidth; t.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => { t.hidden = true; }, 3200);
+      }
+    }
+    lastNames = names;
   }
 
   function renderObservations() {
@@ -434,6 +466,7 @@
     renderChips();
     renderGhosts(possible);
     renderSummary(possible);
+    announce(possible);
     $("#hide-impossible").checked = state.hideOut;
   }
 

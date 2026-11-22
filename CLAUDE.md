@@ -20,7 +20,7 @@ instead of running `git commit`/`git push` yourself, and show screenshots of vis
 | `js/voice.js` | Voice commands (Web Speech API, Chrome/Edge). Parser in `handle(text)`. |
 | `js/sync.js` | Shared journal over PeerJS (loaded on demand from jsDelivr). |
 | `js/log.js` | Case log timeline + shareable report (`PHLog`). |
-| `js/mobile.js` | Bottom nav, swipe between views, floating timer dock, search toggle, wake lock, install prompt, service worker registration. |
+| `js/mobile.js` | Bottom nav (Case, Tools, HUNT, Learn, Maps), swipe between Case/Tools, floating timer dock, search toggle, wake lock, install prompt, service worker registration. |
 | `js/fx.js` | Theme switching, generated sound effects (Web Audio), haptics toggle (`PHFx`). |
 | `js/extras.js` | Hunt mode overlay, Learn dialog (cursed items, quiz, personal stats) (`PHExtras.openHunt/openLearn`). |
 | `css/features.css` | Styles for hunt mode, Learn, smart next steps, phone nav HUNT button. |
@@ -57,7 +57,7 @@ Script load order matters (index.html bottom): ghosts → app → maps → tools
    `"/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe" --headless --disable-gpu --user-data-dir=<tmp> --window-size=1600,1000 --virtual-time-budget=3000 --screenshot=<out.png> http://localhost:5500/`
    Headless windows can't go below ~500px wide: for phone views, put the site in `<iframe width="390" height="844">`
    on a temporary page **served from the same origin** (so it can call `iframe.contentWindow.PH…` to set up state),
-   screenshot that, then delete the temporary page. `?view=journal|ghosts|tools` opens a phone section directly.
+   screenshot that, then delete the temporary page. Phone has two pages: Case (filters + ghosts, default) and `?view=tools`.
 
 ## Ideas backlog (pick from here when asked to "add stuff")
 - Equipment tiers cheat sheet; challenge-mode / custom difficulty builder

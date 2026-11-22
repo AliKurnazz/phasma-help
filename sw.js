@@ -1,5 +1,5 @@
 // Offline support. Network first (always fresh when online), cache as fallback.
-const CACHE = "phasma-help-v5";
+const CACHE = "phasma-help-v6";
 const SHELL = [
   "./", "index.html", "css/style.css", "css/themes.css", "css/features.css", "manifest.webmanifest", "icons/icon.svg", "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png",
   "js/ghosts.js", "js/app.js", "js/maps.js", "js/tools.js", "js/voice.js", "js/sync.js", "js/log.js", "js/mobile.js", "js/fx.js", "js/extras.js",

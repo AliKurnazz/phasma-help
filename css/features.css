@@ -122,3 +122,42 @@
   .quiz-opt { font-size: 18px; padding: 14px 6px; }
   .hunt-btn { padding: 26px 10px; }
 }
+
+/* ---------- "Ruled out" message ---------- */
+.toast {
+  position: fixed; z-index: 30; right: 24px; bottom: 24px; max-width: 380px;
+  padding: 12px 16px; border-radius: 14px; font-size: 14px; line-height: 1.45;
+  background: var(--panel-2); color: var(--text); border: 1px solid var(--line-strong); box-shadow: var(--shadow);
+}
+.toast.show { animation: toast-in .25s ease-out; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(10px); } }
+.toast .t-out b { color: var(--no); }
+.toast .t-in b { color: var(--yes); }
+.toast .t-left { margin-top: 4px; font-size: 12.5px; color: var(--muted); font-weight: 600; }
+
+/* ---------- phone: one Case page (filters + ghosts), Tools separate ---------- */
+@media (max-width: 800px) {
+  body[data-view="case"] .tools { display: none; }
+  body[data-view="tools"] .journal,
+  body[data-view="tools"] .ghosts-wrap,
+  body[data-view="tools"] .quick-ev { display: none; }
+  body[data-view="case"] .journal,
+  body[data-view="case"] .ghosts-wrap { display: block; }
+  /* the pinned strip already has the evidence buttons */
+  .journal .ev-section { display: none; }
+  .journal { padding-bottom: 6px; }
+  .journal section + section { margin-top: 18px; padding-top: 14px; }
+
+  .quick-ev { margin: -4px 0 4px; }
+  .qcount { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; line-height: 1.1;
+            border-color: var(--accent-2); background: rgba(127, 216, 205, .1); color: var(--accent); }
+  .qcount b { font-size: 17px; }
+  .qcount span { font-size: 11px; font-weight: 600; }
+  .qcount.one { border-color: var(--yes); background: var(--yes-bg); color: var(--yes); }
+  .qcount.zero { border-color: var(--no); background: var(--no-bg); color: var(--no); }
+
+  .toast { left: 12px; right: 12px; max-width: none; bottom: calc(86px + env(safe-area-inset-bottom)); }
+  body:has(.dock-chip) .toast { bottom: calc(150px + env(safe-area-inset-bottom)); }
+  #map-btn { display: none !important; }
+  #wake-btn:not([hidden]) { display: grid !important; }
+}

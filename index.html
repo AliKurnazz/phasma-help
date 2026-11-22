@@ -53,7 +53,13 @@
     <span id="voice-heard" class="voice-heard"></span>
   </div>
 
+  <!-- "Ruled out: …" message after each change -->
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
   <main class="layout">
+    <!-- Phone: evidence strip + ghosts-left counter, pinned on the Case page -->
+    <div id="quick-ev" class="quick-ev" aria-label="Evidence (tap: found, hold: ruled out)"></div>
+
     <!-- LEFT: journal -->
     <aside class="panel journal">
       <section>
@@ -61,7 +67,7 @@
         <div id="difficulty" class="seg"></div>
       </section>
 
-      <section>
+      <section class="ev-section">
         <h2>Evidence</h2>
         <p class="hint">Tap = found · Hold or right-click = ruled out</p>
         <div id="evidence" class="evidence-list"></div>
@@ -100,7 +106,6 @@
 
     <!-- CENTER: ghosts -->
     <section class="ghosts-wrap">
-      <div id="quick-ev" class="quick-ev" aria-label="Evidence (tap: found, hold: ruled out)"></div>
       <div class="status">
         <div class="summary-wrap">
           <div id="emf" class="emf" title="EMF meter: climbs as you narrow it down"></div>
@@ -278,11 +283,11 @@
 
   <!-- Phone navigation -->
   <nav class="bottom-nav" aria-label="Sections">
-    <button data-view="journal"><span>📓</span>Journal</button>
-    <button data-view="ghosts" class="on"><span>👻</span>Ghosts<b id="nav-count"></b></button>
-    <button class="nav-hunt" data-action="hunt" aria-label="Hunt mode"><span>🩸</span>HUNT</button>
+    <button data-view="case" class="on"><span>👻</span>Case<b id="nav-count"></b></button>
     <button data-view="tools"><span>⏱</span>Tools</button>
+    <button class="nav-hunt" data-action="hunt" aria-label="Hunt mode"><span>🩸</span>HUNT</button>
     <button data-action="learn"><span>📖</span>Learn</button>
+    <button data-action="maps"><span>🗺</span>Maps</button>
   </nav>
 
   <!-- Hunt mode: one-handed screen for when the ghost hunts -->

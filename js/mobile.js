@@ -14,7 +14,7 @@
   nav.querySelectorAll("button[data-view]").forEach((b) => { b.onclick = () => setView(b.dataset.view); });
   // ?view=journal|ghosts|tools opens that section (handy as a home-screen bookmark)
   const startView = new URLSearchParams(location.search).get("view");
-  setView(["journal", "ghosts", "tools"].includes(startView) ? startView : "ghosts");
+  setView(startView === "tools" ? "tools" : "case"); // old links (?view=journal/ghosts) open the Case page
 
   // Badge with the number of ghosts left.
   const badge = () => {
@@ -28,7 +28,7 @@
   // ---------- search toggle (phone header) ----------
   $("#search-btn").onclick = () => {
     const on = document.body.classList.toggle("searching");
-    if (on) { setView("ghosts"); $("#search").focus(); }
+    if (on) { setView("case"); $("#search").focus(); }
     else { $("#search").value = ""; window.PH.search(""); }
   };
 
@@ -69,7 +69,7 @@
   setInterval(() => { if (running.size) drawDock(); }, 250);
 
   // ---------- swipe left / right between sections ----------
-  const ORDER = ["journal", "ghosts", "tools"];
+  const ORDER = ["case", "tools"];
   let sx = 0, sy = 0, st = 0, swiping = false;
   const main = document.querySelector("main");
   main.addEventListener("touchstart", (e) => {

@@ -237,7 +237,8 @@
 
   // =================== wiring: phone nav, keys, settings ===================
   document.querySelectorAll(".bottom-nav [data-action]").forEach((b) => {
-    b.onclick = () => (b.dataset.action === "hunt" ? openHunt() : openLearn());
+    const a = b.dataset.action;
+    b.onclick = () => (a === "hunt" ? openHunt() : a === "maps" ? window.PHMaps.open() : openLearn());
   });
   document.addEventListener("keydown", (e) => {
     if (e.target.matches("input, select, textarea") || e.ctrlKey || e.metaKey || e.altKey) return;
