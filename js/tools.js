@@ -130,6 +130,9 @@
   $("#san-reset").onclick = () => { setRunning(false); s.value = +s.start; saveSan(); render(); };
   document.querySelectorAll("[data-san]").forEach((b) => { b.onclick = () => add(+b.dataset.san); });
 
+  // "New case" also resets the sanity tracker.
+  $("#reset").addEventListener("click", () => $("#san-reset").click());
+
   if (window.PH) window.PH.onChange(render);
   // Re-render when a remote update arrives too.
   document.addEventListener("ph:remote", render);

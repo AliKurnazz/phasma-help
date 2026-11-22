@@ -181,6 +181,27 @@
     left.title = "Jump to the ghost list";
     left.onclick = () => $("#summary").scrollIntoView({ behavior: "smooth", block: "center" });
     box.append(left);
+
+    // Remaining ghost names, right under the evidence: see the result without scrolling.
+    const names = el("div", "qnames");
+    if (!n) names.append(el("span", "qnone", "No ghost fits: check your evidence"));
+    possible.forEach((g) => {
+      const chip = el("button", "qname" + (state.guess === g.name ? " guess" : ""), g.name.replace(/^The /, ""));
+      chip.title = `Show ${g.name}`;
+      chip.onclick = () => {
+        openCards.add(g.name);
+        const card = document.getElementById("g-" + g.name.toLowerCase().replace(/[^a-z]+/g, "-"));
+        if (card) {
+          card.classList.add("open");
+          // keep the card clear of the pinned strip
+          const y = card.getBoundingClientRect().top + window.scrollY - box.offsetHeight - 70;
+          window.scrollTo(0, y);
+          card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+        }
+      };
+      names.append(chip);
+    });
+    box.append(names);
   }
 
   // "Ruled out: …" / "Back in: …" message so you see what each tap changed.
@@ -367,6 +388,7 @@
         !out && speedMatch && possible.length > 1 ? "speed-match" : ""].join(" ");
 
       const card = el("article", cls);
+      card.id = "g-" + g.name.toLowerCase().replace(/[^a-z]+/g, "-");
 
       if (openCards.has(g.name)) card.classList.add("open");
       const head = el("div", "g-head");
@@ -520,7 +542,11 @@
     };
     clock.onclick = toggle;
     draw();
-    return { toggle };
+    // stop() for "New case": stops and resets the clock to 0:00
+    return {
+      toggle,
+      stop: () => { if (start != null) toggle(); elapsed = 0; draw(); },
+    };
   }
 
   const timers = {
@@ -609,6 +635,7 @@
   $("#search").oninput = () => renderGhosts(possibleGhosts());
   $("#hide-impossible").onchange = (e) => { state.hideOut = e.target.checked; update(); };
   $("#reset").onclick = () => {
+    Object.values(timers).forEach((t) => t.stop()); // a new case stops every timer
     const keepHide = state.hideOut;
     state = fresh();
     state.hideOut = keepHide;
