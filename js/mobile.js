@@ -8,10 +8,10 @@
   function setView(v) {
     if (v === "maps") { window.PHMaps && window.PHMaps.open(); return; }
     document.body.dataset.view = v;
-    nav.querySelectorAll("button").forEach((b) => b.classList.toggle("on", b.dataset.view === v));
+    nav.querySelectorAll("button[data-view]").forEach((b) => b.classList.toggle("on", b.dataset.view === v));
     window.scrollTo({ top: 0 });
   }
-  nav.querySelectorAll("button").forEach((b) => { b.onclick = () => setView(b.dataset.view); });
+  nav.querySelectorAll("button[data-view]").forEach((b) => { b.onclick = () => setView(b.dataset.view); });
   // ?view=journal|ghosts|tools opens that section (handy as a home-screen bookmark)
   const startView = new URLSearchParams(location.search).get("view");
   setView(["journal", "ghosts", "tools"].includes(startView) ? startView : "ghosts");

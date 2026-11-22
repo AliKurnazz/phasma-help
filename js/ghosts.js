@@ -8,13 +8,75 @@
 // verify: newer ghost, double-check numbers against the current patch
 
 const EVIDENCE = [
-  { key: "emf",      name: "EMF Level 5",  short: "EMF 5",   hotkey: "1" },
-  { key: "box",      name: "Spirit Box",   short: "Box",     hotkey: "2" },
-  { key: "uv",       name: "Ultraviolet",  short: "UV",      hotkey: "3" },
-  { key: "orb",      name: "Ghost Orb",    short: "Orbs",    hotkey: "4" },
-  { key: "writing",  name: "Ghost Writing",short: "Writing", hotkey: "5" },
-  { key: "freezing", name: "Freezing Temps",short: "Freezing",hotkey: "6" },
-  { key: "dots",     name: "D.O.T.S.",     short: "DOTS",    hotkey: "7" },
+  { key: "emf",      name: "EMF Level 5",  short: "EMF 5",   hotkey: "1",
+    how: "Hold the EMF reader where the ghost just interacted: thrown items, opened doors, light switches." },
+  { key: "box",      name: "Spirit Box",   short: "Box",     hotkey: "2",
+    how: "Lights off, stand in the ghost room and ask questions. Some ghosts only answer when you're alone." },
+  { key: "uv",       name: "Ultraviolet",  short: "UV",      hotkey: "3",
+    how: "Shine UV on doors, light switches, windows and keyboards the ghost touched. Salt footprints count too." },
+  { key: "orb",      name: "Ghost Orb",    short: "Orbs",    hotkey: "4",
+    how: "Watch the ghost room through a video camera or head-cam with night vision." },
+  { key: "writing",  name: "Ghost Writing",short: "Writing", hotkey: "5",
+    how: "Put a ghost writing book on the floor in the ghost room and check it every minute." },
+  { key: "freezing", name: "Freezing Temps",short: "Freezing",hotkey: "6",
+    how: "Use a thermometer in the ghost room: below 0 °C / 32 °F. You'll also see your breath." },
+  { key: "dots",     name: "D.O.T.S.",     short: "DOTS",    hotkey: "7",
+    how: "Place a D.O.T.S. projector in the ghost room and watch for the green figure (or on camera)." },
+];
+
+// What to do during a hunt if this ghost is still possible.
+const HUNT_TIPS = {
+  "Deogen": "Deogen: it always finds you. Don't hide: loop it around furniture, it's very slow up close.",
+  "Revenant": "Revenant: extremely fast once it sees you. Break line of sight early and hide.",
+  "Yokai": "Yokai: it only hears you within 2.5 m. Stay quiet and keep electronics off.",
+  "Jinn": "Jinn: turn the fuse box off so it can't speed up.",
+  "Raiju": "Raiju: drop or switch off electronics; they make it faster.",
+  "Hantu": "Hantu: faster in cold rooms. Run through warm parts of the house.",
+  "Moroi": "Moroi: smudging blinds it for longer; it's faster when sanity is low.",
+  "Thaye": "Thaye: a young Thaye is very fast; it slows down as it ages.",
+  "Myling": "Myling: you'll hear footsteps late. Watch for flickering lights instead.",
+  "Phantom": "Phantom: invisible for long stretches. Don't rely on seeing it.",
+  "Demon": "Demon: can hunt again after just 20 s. Stay near a hiding spot.",
+  "Spirit": "Spirit: a smudge keeps it from hunting for 3 minutes.",
+  "The Twins": "Twins: the next hunt might be slightly faster than the last.",
+  "Obake": "Obake: it may change shape during the hunt.",
+  "The Mimic": "Mimic: it copies other ghosts, so expect anything.",
+  "Banshee": "Banshee: it chases one target. If it's not you, help them.",
+  "Shade": "Shade: it won't start a hunt while someone is in its room.",
+  "Oni": "Oni: very visible during hunts; you'll see it coming.",
+};
+
+// Cursed possessions: what they do and how risky they are.
+// Exact sanity costs change between patches, so kept descriptive.
+const CURSED = [
+  { name: "Ouija Board", icon: "🔤", risk: 3,
+    does: "Ask it questions out loud: where the ghost is, how old it is, how many people are in the room, and more.",
+    risk_text: "Every question costs sanity, bigger questions cost more. Running out of sanity, or walking away without saying “goodbye”, triggers a cursed hunt.",
+    tip: "Ask “where are you?” early to find the ghost room. Always end with “goodbye”." },
+  { name: "Music Box", icon: "🎵", risk: 3,
+    does: "Wind it up and it plays a tune; a nearby ghost sings along and can appear and walk towards it.",
+    risk_text: "Drains sanity while playing. If the ghost reaches you or the song ends near it, a cursed hunt can start.",
+    tip: "Great for finding the ghost room: listen for singing, then drop it and run." },
+  { name: "Tarot Cards", icon: "🃏", risk: 4,
+    does: "Draw a card for a random effect: restore or lose sanity, force a ghost event, trap the ghost, revive a teammate, or worse.",
+    risk_text: "Death starts a cursed hunt, The Moon drops sanity to 0, and The Hanged Man kills you instantly.",
+    tip: "Draw at high sanity and near a hiding spot. The Sun restores your sanity fully." },
+  { name: "Monkey Paw", icon: "🐒", risk: 4,
+    does: "Make a wish (for example to see the ghost room, more activity, or to revive someone). Wishes come true… with a price.",
+    risk_text: "Every wish has a nasty side effect, from slower movement to hunts.",
+    tip: "Only wish when you know what you're trading. Location wishes are popular." },
+  { name: "Haunted Mirror", icon: "🪞", risk: 2,
+    does: "Look into it to see a view of the ghost room.",
+    risk_text: "Drains sanity quickly while you look. It breaks when your sanity runs too low and can trigger a cursed hunt.",
+    tip: "A quick look at high sanity is usually enough to find the room." },
+  { name: "Voodoo Doll", icon: "🪡", risk: 3,
+    does: "Pins are pushed in at random, forcing the ghost to interact (good for evidence like UV or EMF).",
+    risk_text: "Each pin costs some sanity. The heart pin starts a cursed hunt.",
+    tip: "Use it near the ghost room with EMF and UV ready." },
+  { name: "Summoning Circle", icon: "🕯", risk: 4,
+    does: "Light all 5 candles and the ghost appears in the circle. Perfect for a ghost photo.",
+    risk_text: "Each candle costs sanity, and after the ghost appears it starts a cursed hunt.",
+    tip: "Take the photo, then run to your hiding spot straight away." },
 ];
 
 const N = [1.7, 2.8]; // normal ghost: 1.7 m/s, LOS build-up to ~2.8

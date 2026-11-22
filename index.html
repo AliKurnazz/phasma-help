@@ -20,6 +20,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/themes.css">
+  <link rel="stylesheet" href="css/features.css">
   <script>
     // apply the saved look before first paint (no flash)
     try { document.documentElement.dataset.theme = JSON.parse(localStorage.getItem("phasma-help:fx") || "{}").theme || "spectral"; } catch (e) {}
@@ -36,6 +37,8 @@
       <button id="search-btn" class="btn phone-only" title="Search ghosts" aria-label="Search ghosts">🔍</button>
       <button id="voice-btn" class="btn" title="Voice commands (V)"><span aria-hidden="true">🎤</span><span class="btn-text"> Voice</span></button>
       <button id="map-btn" class="btn" title="Maps (M)"><span aria-hidden="true">🗺</span><span class="btn-text"> Maps</span></button>
+      <button id="learn-btn" class="btn desk-only" title="Cursed items, quiz and stats (L)"><span aria-hidden="true">📖</span><span class="btn-text"> Learn</span></button>
+      <button id="hunt-btn" class="btn hunt-top-btn desk-only" title="Hunt mode (G)"><span aria-hidden="true">🩸</span><span class="btn-text"> Hunt!</span></button>
       <button id="wake-btn" class="btn" title="Keep the screen on" hidden><span aria-hidden="true">🔆</span><span class="btn-text"> Screen on</span></button>
       <button id="install-btn" class="btn primary" hidden><span aria-hidden="true">⬇</span><span class="btn-text"> Install</span></button>
       <button id="reset" class="btn danger" title="New case (Backspace)"><span aria-hidden="true">↺</span><span class="btn-text"> New case</span></button>
@@ -65,7 +68,7 @@
       </section>
 
       <section>
-        <h2>Best next test</h2>
+        <h2>Next steps</h2>
         <div id="suggest" class="suggest"></div>
       </section>
 
@@ -277,9 +280,60 @@
   <nav class="bottom-nav" aria-label="Sections">
     <button data-view="journal"><span>📓</span>Journal</button>
     <button data-view="ghosts" class="on"><span>👻</span>Ghosts<b id="nav-count"></b></button>
+    <button class="nav-hunt" data-action="hunt" aria-label="Hunt mode"><span>🩸</span>HUNT</button>
     <button data-view="tools"><span>⏱</span>Tools</button>
-    <button data-view="maps"><span>🗺</span>Maps</button>
+    <button data-action="learn"><span>📖</span>Learn</button>
   </nav>
+
+  <!-- Hunt mode: one-handed screen for when the ghost hunts -->
+  <dialog id="hunt" class="hunt-dialog">
+    <div class="hunt-wrap">
+      <div class="hunt-top">
+        <span class="hunt-label">HUNT IN PROGRESS</span>
+        <button id="hunt-close" class="btn small" aria-label="Close">✕</button>
+      </div>
+      <div id="hunt-clock" class="hunt-clock">0:00</div>
+      <p id="hunt-sub" class="hunt-sub"></p>
+      <div class="hunt-actions">
+        <button id="hunt-smudge" class="hunt-btn">💨<span>I smudged it</span></button>
+        <button id="hunt-over" class="hunt-btn primary">✅<span>Hunt over</span></button>
+      </div>
+      <div class="hunt-tips">
+        <h3>Survive this one</h3>
+        <ul id="hunt-tips"></ul>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Learn: cursed possessions, quiz, stats -->
+  <dialog id="learn" class="learn-dialog">
+    <div class="learn-head">
+      <div class="tabs learn-tabs" role="tablist">
+        <button class="ltab on" data-ltab="cursed">Cursed items</button>
+        <button class="ltab" data-ltab="quiz">Quiz</button>
+        <button class="ltab" data-ltab="stats">My stats</button>
+      </div>
+      <button id="learn-close" class="btn small" aria-label="Close">✕</button>
+    </div>
+    <div class="learn-body" data-lbody="cursed"><div id="cursed-list" class="cursed-list"></div></div>
+    <div class="learn-body" data-lbody="quiz" hidden>
+      <div class="quiz-score"><span>Streak <b id="quiz-streak">0</b></span><span>Best <b id="quiz-best">0</b></span><span>Score <b id="quiz-score">0/0</b></span></div>
+      <p class="quiz-q-label">Which ghost is this?</p>
+      <blockquote id="quiz-q" class="quiz-q"></blockquote>
+      <div id="quiz-opts" class="quiz-opts"></div>
+      <p id="quiz-feedback" class="note"></p>
+      <button id="quiz-next" class="btn primary" hidden>Next question →</button>
+    </div>
+    <div class="learn-body" data-lbody="stats" hidden>
+      <p class="hint">Saved on this device when you start a new case after naming the ghost.</p>
+      <div id="stats-cards" class="stats-cards"></div>
+      <h3>Most seen ghosts</h3>
+      <div id="stats-top" class="stats-top"></div>
+      <h3>Recent cases</h3>
+      <ol id="stats-recent" class="case-log"></ol>
+      <button id="stats-clear" class="btn small danger">Clear stats</button>
+    </div>
+  </dialog>
 
   <dialog id="maps" class="maps-dialog">
     <div class="maps-layout">
@@ -326,6 +380,7 @@
       </div>
       <label class="set-row toggle"><span>Sound effects</span><input id="set-sound" type="checkbox"></label>
       <label class="set-row toggle"><span>Vibration (phones)</span><input id="set-haptics" type="checkbox" checked></label>
+      <label class="set-row toggle" id="set-wake-row" hidden><span>Keep screen on</span><input id="set-wake" type="checkbox"></label>
     </div>
     <h2 class="desk-only">Shortcuts</h2>
     <table class="desk-only">
@@ -335,6 +390,8 @@
       <tr><td><kbd>T</kbd></td><td>Tap footstep</td></tr>
       <tr><td><kbd>M</kbd></td><td>Maps</td></tr>
       <tr><td><kbd>V</kbd></td><td>Voice commands on / off</td></tr>
+      <tr><td><kbd>G</kbd></td><td>Hunt mode (press again: hunt over)</td></tr>
+      <tr><td><kbd>L</kbd></td><td>Learn: cursed items, quiz, stats</td></tr>
       <tr><td><kbd>/</kbd></td><td>Search ghosts</td></tr>
       <tr><td><kbd>Backspace</kbd></td><td>Reset journal</td></tr>
     </table>
@@ -356,5 +413,6 @@
   <script src="js/log.js"></script>
   <script src="js/mobile.js"></script>
   <script src="js/fx.js"></script>
+  <script src="js/extras.js"></script>
 </body>
 </html>

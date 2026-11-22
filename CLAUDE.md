@@ -13,7 +13,7 @@ instead of running `git commit`/`git push` yourself, and show screenshots of vis
 | `index.html` | Page shell. Left = journal, middle = ghost cards, right = tool tabs (Timers, Speed, Sanity, Team, Log). Dialogs: maps, settings/help. |
 | `css/style.css` | Base styles + phone layout (`@media (max-width: 800px)`, several blocks; later blocks override earlier ones). |
 | `css/themes.css` | EMF meter, IDENTIFIED stamp, settings UI, and the 3 looks: `spectral` (default), `nightvision`, `journal` via `:root[data-theme=…]`. |
-| `js/ghosts.js` | **All game data**: `EVIDENCE`, `GHOSTS`, `OBSERVATIONS`, `HUNT_BUCKETS`. Ghosts with `verify: true` are newer and less certain. |
+| `js/ghosts.js` | **All game data**: `EVIDENCE` (with `how` tips), `GHOSTS`, `HUNT_TIPS`, `CURSED`, `OBSERVATIONS`, `HUNT_BUCKETS`. Ghosts with `verify: true` are newer and less certain. |
 | `js/app.js` | Core: state, filtering (`evidenceReason`, `filterReason`), rendering, timers, tapper. Exposes `window.PH`. |
 | `js/tools.js` | Tabs (`PHTools.showTab`), weather notes, sanity tracker. |
 | `js/maps.js` | Map viewer: list, zoom/pan/pinch, marks per map. Loads `maps/<id>.svg` first, then png/jpg/webp. |
@@ -22,11 +22,13 @@ instead of running `git commit`/`git push` yourself, and show screenshots of vis
 | `js/log.js` | Case log timeline + shareable report (`PHLog`). |
 | `js/mobile.js` | Bottom nav, swipe between views, floating timer dock, search toggle, wake lock, install prompt, service worker registration. |
 | `js/fx.js` | Theme switching, generated sound effects (Web Audio), haptics toggle (`PHFx`). |
+| `js/extras.js` | Hunt mode overlay, Learn dialog (cursed items, quiz, personal stats) (`PHExtras.openHunt/openLearn`). |
+| `css/features.css` | Styles for hunt mode, Learn, smart next steps, phone nav HUNT button. |
 | `tools/build-maps.js` | Generates `maps/*.svg` from shape lists. Run `node tools/build-maps.js`. `maps/ridgeview.svg` is hand-written. |
 | `sw.js` | Offline support, network-first. **Bump `CACHE` version** when adding/renaming files, and add new files to `SHELL`. |
 | `manifest.webmanifest`, `icons/` | Installable app + home-screen icons. Icon URLs carry `?v=N` to beat phone caches; bump N if icons change. |
 
-Script load order matters (index.html bottom): ghosts → app → maps → tools → voice → sync → log → mobile → fx.
+Script load order matters (index.html bottom): ghosts → app → maps → tools → voice → sync → log → mobile → fx → extras.
 
 ## How the pieces talk
 - `window.PH` (app.js): `state`, `possible()`, `findGhost(text)`, `setEvidence(k, v)` (v: 1 found, -1 ruled out, 0 unknown),
@@ -45,7 +47,7 @@ Script load order matters (index.html bottom): ghosts → app → maps → tools
 - `localStorage` reads/writes always inside `try/catch`.
 - No copied or watermarked images (no third-party map art). Maps are our own SVGs.
 - Don't reference other cheat-sheet sites in the code. Credit for data: the Phasmophobia Wiki (footer/README).
-- Keep keyboard shortcuts (1–7, Shift+1–7, S/C/H/T/M/V, /, Backspace) working; update the help dialog when adding one.
+- Keep keyboard shortcuts (1–7, Shift+1–7, S/C/H/T/M/V/G/L, /, Backspace) working; update the help dialog when adding one.
 - Don't commit or push; finish with the git commands for the owner.
 
 ## Testing
@@ -58,10 +60,8 @@ Script load order matters (index.html bottom): ghosts → app → maps → tools
    screenshot that, then delete the temporary page. `?view=journal|ghosts|tools` opens a phone section directly.
 
 ## Ideas backlog (pick from here when asked to "add stuff")
-- Ghost quiz / practice mode (show a tell → guess the ghost)
-- Cursed possessions guide (Ouija questions, music box, tarot cards, monkey paw, summoning circle, haunted mirror, voodoo doll)
 - Equipment tiers cheat sheet; challenge-mode / custom difficulty builder
-- Personal stats across cases (most found ghost, win rate, average case time)
+- Mark guesses right/wrong in stats (win rate)
 - Ghost room marker synced through the shared journal; room-by-room checklist on maps
 - Fingerprint / DOTS / writing "how to get it" tips per evidence
 - More languages (Dutch first), with all UI text in one object

@@ -16,6 +16,9 @@ A fast, no-install Phasmophobia evidence journal. Open `index.html` or host it o
 - **Maps**: 12 hand-built floor plans (rooms, stairs, windows, fuse-box spots) with zoom/pan and your own marks. Rebuild them with `node tools/build-maps.js`
 - **Case log**: automatic timeline of evidence, timers and guesses, plus a one-tap shareable case report
 - **Made for phones**: bottom navigation, sticky evidence strip, press-and-hold to rule out, folding ghost cards, vibration on timer markers, keep-screen-on, installable app that works offline
+- **Hunt mode**: one-tap red screen with a big hunt clock, smudge / hunt-over buttons and survival tips for the ghosts still possible
+- **Smart next steps**: what to test next, how to get that evidence, and which behaviour would rule ghosts out
+- **Learn**: cursed possessions guide, ghost-tell quiz with streaks, and personal case stats
 - **Shared journal**: create a room, share the code or link, and everyone's journal stays in sync (peer-to-peer via PeerJS)
 - **Voice commands** (Chrome/Edge): "EMF five", "no orbs", "nightmare", "rule out wraith", "smudge", "open map prison"…
 

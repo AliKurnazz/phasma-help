@@ -199,16 +199,30 @@
     const box = $("#suggest");
     box.innerHTML = "";
     const total = possible.length;
-    if (total <= 1) {
-      box.append(el("div", "sug-done", total === 1 ? `It's the <b>${possible[0].name}</b>.` : "No ghost matches. Check your evidence."));
+    if (total === 1) {
+      box.append(el("div", "sug-done", `It's the <b>${possible[0].name}</b>. Mark it with ★ and get out.`));
       return;
     }
+    if (total === 0) {
+      // Help find the mistake instead of a dead end.
+      const tip = el("div", "sug-zero");
+      tip.append(el("b", null, "No ghost fits. Usually one of these:"));
+      const ul = el("ul");
+      [
+        "An evidence marked by mistake: tap it again to clear it.",
+        state.evCount === 3 ? "You're on a reduced-evidence difficulty: change it above." : "Check the difficulty above matches your contract.",
+        "Orbs + 3 other evidence? That's the Mimic's fake orbs.",
+        state.obs.length ? "A ticked behaviour that you weren't sure about." : "",
+      ].filter(Boolean).forEach((t) => ul.append(el("li", null, t)));
+      tip.append(ul);
+      box.append(tip);
+      return;
+    }
+
+    // 1) the evidence that splits the remaining ghosts best, with how to get it
     const found = Object.values(state.evidence).filter((v) => v === 1).length;
-    if (found >= state.evCount && state.evCount > 0) {
-      box.append(el("div", "hint", "All evidence found. Use behaviour tests on the cards to decide."));
-      return;
-    }
-    const rows = EVIDENCE.filter((e) => state.evidence[e.key] === 0)
+    const evDone = found >= state.evCount && state.evCount > 0;
+    const rows = evDone ? [] : EVIDENCE.filter((e) => state.evidence[e.key] === 0)
       .map((e) => {
         const k = possible.filter((g) => g.evidence.includes(e.key)).length;
         return { e, k, score: Math.min(k, total - k) };
@@ -216,17 +230,52 @@
       .filter((r) => r.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, 3);
-    if (!rows.length) {
-      box.append(el("div", "hint", "Evidence can't split these further. Use behaviour tests."));
-      return;
-    }
-    rows.forEach((r) => {
-      const row = el("div", "sug",
-        `<span>${r.e.name}</span><span class="n">${r.k}/${total}</span>
-         <span class="bar"><i style="width:${(r.k / total) * 100}%"></i></span>`);
+    rows.forEach((r, i) => {
+      const row = el("div", "sug" + (i === 0 ? " top" : ""));
+      row.append(el("span", null, r.e.name), el("span", "n", `${r.k}/${total}`));
+      const bar = el("span", "bar");
+      const fill = el("i");
+      fill.style.width = (r.k / total) * 100 + "%";
+      bar.append(fill);
+      row.append(bar);
+      if (i === 0) row.append(el("p", "how", r.e.how));
       row.title = `If found: ${r.k} left. If ruled out: ${total - r.k} left.`;
       box.append(row);
     });
+
+    // 2) behaviour you could watch for that would rule ghosts out
+    const names = possible.map((g) => g.name);
+    const watch = OBSERVATIONS.filter((o) => !state.obs.includes(o.key))
+      .map((o) => {
+        let n = 0;
+        if (o.out) n = o.out.filter((x) => names.includes(x)).length;
+        else if (o.only) n = names.filter((x) => !o.only.includes(x)).length;
+        else if (o.minHunt) n = possible.filter((g) => Math.max(...g.hunt) < o.minHunt).length;
+        return { o, n };
+      })
+      .filter((w) => w.n > 0 && w.n < total)
+      .sort((a, b) => (a.o.out ? 0 : 1) - (b.o.out ? 0 : 1) || b.n - a.n)
+      .slice(0, 2);
+    if (watch.length) {
+      const w = el("div", "sug-watch");
+      w.append(el("small", null, "Watch for"));
+      watch.forEach(({ o, n }) => w.append(el("div", null, `${o.label} → rules out ${n}`)));
+      box.append(w);
+    }
+
+    // 3) a few ghosts left: how to tell them apart
+    if (total <= 4) {
+      const t = el("div", "sug-watch");
+      t.append(el("small", null, "Tell them apart"));
+      possible.forEach((g) => {
+        const line = el("div");
+        line.append(el("b", null, g.name + ": "), document.createTextNode((g.tests && g.tests[0]) || g.tells[0]));
+        t.append(line);
+      });
+      box.append(t);
+    } else if (!rows.length) {
+      box.append(el("div", "hint", "Evidence can't split these further. Use the behaviour checks below."));
+    }
   }
 
   function renderChips() {
@@ -421,7 +470,11 @@
         mk.classList.toggle("hit", hit);
       });
       if (start != null) {
-        if (elapsed >= max) { stop(); return; }
+        if (elapsed >= max) {
+          stop();
+          document.dispatchEvent(new CustomEvent("ph:timer", { detail: { name, running: false, elapsed } }));
+          return;
+        }
         raf = requestAnimationFrame(draw);
       }
     };
