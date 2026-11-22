@@ -1,0 +1,4 @@
+# Map images are for personal use only: keep them out of the repo / GitHub Pages
+maps/*.png
+maps/*.jpg
+maps/*.webp

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 980" width="1700" height="980" font-family="Inter, Segoe UI, Arial, sans-serif">
+<defs><symbol id="fuse" viewBox="0 0 28 28"><rect x="1.5" y="1.5" width="25" height="25" rx="5" fill="#2a2210" stroke="#f0b93a" stroke-width="2.5"/><path d="M16 4 L8 15 H13 L11 24 L20 12 H15 Z" fill="#f0b93a"/></symbol><style>
+  .floor { fill: #1d2530; stroke: #d5dde7; stroke-width: 4; stroke-linejoin: round; }
+  .outside { fill: #171d25; stroke: #5d6878; stroke-width: 2.5; stroke-linejoin: round; }
+  .void { fill: #10151b; stroke: #5d6878; stroke-width: 2; stroke-dasharray: 8 6; }
+  .solid { fill: #4a5462; stroke: #d5dde7; stroke-width: 3; }
+  .wall  { stroke: #d5dde7; stroke-width: 4; stroke-linecap: round; }
+  .furn  { fill: none; stroke: #4c596a; stroke-width: 2; }
+  .stair { fill: #283241; stroke: #8b98aa; stroke-width: 2; }
+  .tread { stroke: #8b98aa; stroke-width: 1.5; }
+  .win   { stroke: #5fb6ff; stroke-width: 6; stroke-linecap: round; }
+  .door  { stroke: #4fd394; stroke-width: 7; stroke-linecap: round; }
+  .lbl   { fill: #eef2f6; text-anchor: middle; dominant-baseline: middle; }
+  .zone  { fill: #c9d2dc; text-anchor: middle; dominant-baseline: middle; }
+  .ft    { fill: #7fd8cd; font-size: 26px; font-weight: 700; letter-spacing: 2px; }
+  .legend { fill: #c9d2dc; font-size: 18px; }
+</style></defs>
+<rect width="1700" height="980" fill="#10151b"/>
+<text x="60" y="78" fill="#eef2f6" font-size="46" font-weight="700">Grafton Farmhouse</text>
+<text x="62" y="112" fill="#8d99a8" font-size="18">Small map · 2 floors</text>
+<g transform="translate(0,0)">
+<polygon class="floor" points="1156,525 1437,525 1437,700 1342,700 1342,605 1156,605"/>
+<rect class="floor" x="275" y="227" width="185" height="93"/>
+<rect class="floor" x="275" y="320" width="185" height="195"/>
+<rect class="floor" x="275" y="515" width="185" height="185"/>
+<rect class="floor" x="460" y="227" width="180" height="288"/>
+<rect class="floor" x="460" y="515" width="182" height="185"/>
+<rect class="floor" x="640" y="227" width="190" height="185"/>
+<rect class="floor" x="830" y="227" width="92" height="85"/>
+<rect class="floor" x="830" y="312" width="92" height="203"/>
+<rect class="floor" x="702" y="412" width="128" height="103"/>
+<rect class="floor" x="642" y="515" width="188" height="185"/>
+<rect class="floor" x="830" y="515" width="92" height="185"/>
+<rect class="outside" x="365" y="700" width="368" height="45"/>
+<rect class="floor" x="976" y="525" width="180" height="176"/>
+<rect class="void" x="1156" y="605" width="144" height="95"/>
+<rect class="floor" x="1250" y="425" width="187" height="100"/>
+<rect class="floor" x="1442" y="256" width="180" height="264"/>
+<rect class="floor" x="1437" y="520" width="185" height="180"/>
+<rect class="stair" x="557" y="665" width="40" height="35"/><line class="tread" x1="566" y1="665" x2="566" y2="700"/><line class="tread" x1="575" y1="665" x2="575" y2="700"/><line class="tread" x1="584" y1="665" x2="584" y2="700"/><line class="tread" x1="593" y1="665" x2="593" y2="700"/>
+<rect class="stair" x="600" y="625" width="38" height="40"/><line class="tread" x1="600" y1="634" x2="638" y2="634"/><line class="tread" x1="600" y1="643" x2="638" y2="643"/><line class="tread" x1="600" y1="652" x2="638" y2="652"/><line class="tread" x1="600" y1="661" x2="638" y2="661"/>
+<rect class="stair" x="1300" y="605" width="42" height="62"/><line class="tread" x1="1300" y1="614" x2="1342" y2="614"/><line class="tread" x1="1300" y1="623" x2="1342" y2="623"/><line class="tread" x1="1300" y1="632" x2="1342" y2="632"/><line class="tread" x1="1300" y1="641" x2="1342" y2="641"/><line class="tread" x1="1300" y1="650" x2="1342" y2="650"/><line class="tread" x1="1300" y1="659" x2="1342" y2="659"/>
+<rect class="stair" x="1258" y="668" width="42" height="32"/><line class="tread" x1="1267" y1="668" x2="1267" y2="700"/><line class="tread" x1="1276" y1="668" x2="1276" y2="700"/><line class="tread" x1="1285" y1="668" x2="1285" y2="700"/><line class="tread" x1="1294" y1="668" x2="1294" y2="700"/>
+<line class="win" x1="290" y1="227" x2="340" y2="227"/>
+<line class="win" x1="385" y1="227" x2="435" y2="227"/>
+<line class="win" x1="570" y1="227" x2="625" y2="227"/>
+<line class="win" x1="668" y1="227" x2="720" y2="227"/>
+<line class="win" x1="762" y1="227" x2="815" y2="227"/>
+<line class="win" x1="275" y1="435" x2="275" y2="490"/>
+<line class="win" x1="275" y1="535" x2="275" y2="590"/>
+<line class="win" x1="922" y1="340" x2="922" y2="390"/>
+<line class="win" x1="922" y1="435" x2="922" y2="490"/>
+<line class="win" x1="922" y1="535" x2="922" y2="590"/>
+<line class="win" x1="922" y1="635" x2="922" y2="690"/>
+<line class="win" x1="290" y1="700" x2="340" y2="700"/>
+<line class="win" x1="385" y1="700" x2="435" y2="700"/>
+<line class="win" x1="668" y1="700" x2="718" y2="700"/>
+<line class="win" x1="762" y1="700" x2="815" y2="700"/>
+<line class="win" x1="976" y1="540" x2="976" y2="590"/>
+<line class="win" x1="976" y1="635" x2="976" y2="690"/>
+<line class="win" x1="1622" y1="540" x2="1622" y2="590"/>
+<line class="win" x1="1622" y1="635" x2="1622" y2="690"/>
+<line class="win" x1="1368" y1="700" x2="1418" y2="700"/>
+<line class="door" x1="487" y1="700" x2="520" y2="700"/>
+<line class="door" x1="487" y1="227" x2="520" y2="227"/>
+<use href="#fuse" x="275" y="254" width="28" height="28"/>
+<use href="#fuse" x="865" y="281" width="28" height="28"/>
+<use href="#fuse" x="1439" y="366" width="28" height="28"/>
+<text class="lbl" font-size="17"><tspan x="367.5" y="263.7">Storage</tspan><tspan x="367.5" y="283.3">(Workshop)</tspan></text>
+<text class="lbl" font-size="20"><tspan x="367.5" y="417.5">Kitchen</tspan></text>
+<text class="lbl" font-size="20"><tspan x="367.5" y="596.0">Dining</tspan><tspan x="367.5" y="619.0">Room</tspan></text>
+<text class="lbl" font-size="20"><tspan x="550" y="359.5">Living</tspan><tspan x="550" y="382.5">Room</tspan></text>
+<text class="lbl" font-size="20"><tspan x="551" y="607.5">Foyer</tspan></text>
+<text class="lbl" font-size="20"><tspan x="735" y="308.0">Master</tspan><tspan x="735" y="331.0">Bedroom</tspan></text>
+<text class="lbl" font-size="14"><tspan x="876" y="269.5">Closet</tspan></text>
+<text class="lbl" font-size="15"><tspan x="876" y="404.9">Master</tspan><tspan x="876" y="422.1">Bath</tspan></text>
+<text class="lbl" font-size="18"><tspan x="766" y="463.5">Utility</tspan></text>
+<text class="lbl" font-size="20"><tspan x="736" y="596.0">Twin</tspan><tspan x="736" y="619.0">Bedroom</tspan></text>
+<text class="lbl" font-size="14"><tspan x="876" y="599.5">Twin</tspan><tspan x="876" y="615.6">Closet</tspan></text>
+<text class="lbl" font-size="14"><tspan x="549" y="722.5">Porch</tspan></text>
+<text class="lbl" font-size="20"><tspan x="1066" y="613.0">Nursery</tspan></text>
+<text class="lbl" font-size="17"><tspan x="1343.5" y="465.2">Upstairs</tspan><tspan x="1343.5" y="484.8">Bathroom</tspan></text>
+<text class="lbl" font-size="20"><tspan x="1532" y="388.0">Storage</tspan></text>
+<text class="lbl" font-size="20"><tspan x="1529.5" y="598.5">Upstairs</tspan><tspan x="1529.5" y="621.5">Bedroom</tspan></text>
+<text class="zone" font-size="19"><tspan x="1293" y="556.0">Upstairs Hallway</tspan></text>
+<text class="ft" x="275" y="210">GROUND FLOOR</text>
+<text class="ft" x="976" y="505">UPSTAIRS</text>
+<g transform="translate(1000,770)">
+    <text x="0" y="0" class="ft" font-size="20">LEGEND</text>
+    <use href="#fuse" x="0" y="22" width="26" height="26"/><text class="legend" x="42" y="42">Fuse box (possible spot)</text>
+    <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
+    <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
+    <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
+    <text class="legend" x="42" y="163">Stairs</text></g>
+</g></svg>

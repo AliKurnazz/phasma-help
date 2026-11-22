@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000" width="1800" height="1000" font-family="Inter, Segoe UI, Arial, sans-serif">
+<defs><symbol id="fuse" viewBox="0 0 28 28"><rect x="1.5" y="1.5" width="25" height="25" rx="5" fill="#2a2210" stroke="#f0b93a" stroke-width="2.5"/><path d="M16 4 L8 15 H13 L11 24 L20 12 H15 Z" fill="#f0b93a"/></symbol><style>
+  .floor { fill: #1d2530; stroke: #d5dde7; stroke-width: 4; stroke-linejoin: round; }
+  .outside { fill: #171d25; stroke: #5d6878; stroke-width: 2.5; stroke-linejoin: round; }
+  .void { fill: #10151b; stroke: #5d6878; stroke-width: 2; stroke-dasharray: 8 6; }
+  .solid { fill: #4a5462; stroke: #d5dde7; stroke-width: 3; }
+  .wall  { stroke: #d5dde7; stroke-width: 4; stroke-linecap: round; }
+  .furn  { fill: none; stroke: #4c596a; stroke-width: 2; }
+  .stair { fill: #283241; stroke: #8b98aa; stroke-width: 2; }
+  .tread { stroke: #8b98aa; stroke-width: 1.5; }
+  .win   { stroke: #5fb6ff; stroke-width: 6; stroke-linecap: round; }
+  .door  { stroke: #4fd394; stroke-width: 7; stroke-linecap: round; }
+  .lbl   { fill: #eef2f6; text-anchor: middle; dominant-baseline: middle; }
+  .zone  { fill: #c9d2dc; text-anchor: middle; dominant-baseline: middle; }
+  .ft    { fill: #7fd8cd; font-size: 26px; font-weight: 700; letter-spacing: 2px; }
+  .legend { fill: #c9d2dc; font-size: 18px; }
+</style></defs>
+<rect width="1800" height="1000" fill="#10151b"/>
+<text x="60" y="78" fill="#eef2f6" font-size="46" font-weight="700">Maple Lodge Campsite</text>
+<text x="62" y="112" fill="#8d99a8" font-size="18">Medium map · outdoor campsite + cabin</text>
+<g transform="translate(0,0)">
+<polygon class="outside" points="240,535 240,380 330,275 375,275 410,240 410,155 600,140 690,165 830,162 900,195 985,182 1578,90 1575,470 1420,483 1420,355 1198,362 1088,375 1088,905 418,905"/>
+<polygon class="floor" points="1198,375 1410,362 1420,618 1210,628"/>
+<polygon class="floor" points="1214,705 1438,692 1450,905 1222,918"/>
+<circle class="floor" cx="495" cy="725" r="30" style="fill:#4a2c14"/>
+<circle class="floor" cx="708" cy="243" r="30" style="fill:#4a2c14"/>
+<rect class="floor" x="240" y="380" width="332" height="155"/>
+<rect class="solid" x="415" y="385" width="23" height="95"/>
+<rect class="floor" x="672" y="533" width="175" height="170"/>
+<rect class="floor" x="857" y="550" width="58" height="130"/>
+<rect class="floor" x="1025" y="772" width="58" height="130"/>
+<rect class="floor" x="605" y="652" width="55" height="130"/>
+<rect class="floor" x="601" y="113" width="70" height="100" style="fill:#5a2a2a" transform="rotate(15 636 163)"/>
+<rect class="floor" x="756.5" y="133.5" width="65" height="105" style="fill:#26355a" transform="rotate(10 789 186)"/>
+<rect class="floor" x="900" y="217.5" width="100" height="65" style="fill:#5a5226" transform="rotate(-25 950 250)"/>
+<rect class="floor" x="475.5" y="265" width="65" height="100" style="fill:#15181d" transform="rotate(10 508 315)"/>
+<rect class="floor" x="598.5" y="360" width="75" height="100" style="fill:#6b7078" transform="rotate(-35 636 410)"/>
+<rect class="floor" x="842.5" y="384.5" width="65" height="95" style="fill:#454b55" transform="rotate(-25 875 432)"/>
+<rect class="floor" x="551" y="563" width="110" height="70" style="fill:#22472c" transform="rotate(-35 606 598)"/>
+<rect class="floor" x="387" y="560.5" width="120" height="45" style="fill:#3a3f48" transform="rotate(-15 447 583)"/>
+<rect class="floor" x="1345" y="395" width="65" height="95"/>
+<rect class="floor" x="1222" y="800" width="110" height="115"/>
+<rect class="floor" x="1280" y="655" width="60" height="50"/>
+<rect class="floor" x="1447" y="190" width="215" height="60" style="fill:#3a2a18"/>
+<rect class="furn" x="335" y="385" width="80" height="95"/>
+<rect class="furn" x="438" y="385" width="80" height="95"/>
+<rect class="stair" x="1370" y="570" width="40" height="45"/><line class="tread" x1="1370" y1="579" x2="1410" y2="579"/><line class="tread" x1="1370" y1="588" x2="1410" y2="588"/><line class="tread" x1="1370" y1="597" x2="1410" y2="597"/><line class="tread" x1="1370" y1="606" x2="1410" y2="606"/>
+<rect class="stair" x="1405" y="790" width="40" height="95"/><line class="tread" x1="1405" y1="799" x2="1445" y2="799"/><line class="tread" x1="1405" y1="808" x2="1445" y2="808"/><line class="tread" x1="1405" y1="817" x2="1445" y2="817"/><line class="tread" x1="1405" y1="826" x2="1445" y2="826"/><line class="tread" x1="1405" y1="835" x2="1445" y2="835"/><line class="tread" x1="1405" y1="844" x2="1445" y2="844"/><line class="tread" x1="1405" y1="853" x2="1445" y2="853"/><line class="tread" x1="1405" y1="862" x2="1445" y2="862"/><line class="tread" x1="1405" y1="871" x2="1445" y2="871"/><line class="tread" x1="1405" y1="880" x2="1445" y2="880"/>
+<line class="door" x1="712" y1="905" x2="808" y2="905"/>
+<use href="#fuse" x="518" y="384" width="28" height="28"/>
+<use href="#fuse" x="695" y="505" width="28" height="28"/>
+<use href="#fuse" x="1002" y="506" width="28" height="28"/>
+<use href="#fuse" x="902" y="876" width="28" height="28"/>
+<use href="#fuse" x="1378" y="363" width="28" height="28"/>
+<text class="lbl" font-size="20"><tspan x="759.5" y="606.5">Reception</tspan><tspan x="759.5" y="629.5">Building</tspan></text>
+<text class="lbl" font-size="13"><tspan x="886" y="607.5">Storage</tspan><tspan x="886" y="622.5">Tent 2</tspan></text>
+<text class="lbl" font-size="13"><tspan x="1054" y="829.5">Storage</tspan><tspan x="1054" y="844.5">Tent 1</tspan></text>
+<text class="lbl" font-size="13"><tspan x="632.5" y="709.5">Food</tspan><tspan x="632.5" y="724.5">Tent</tspan></text>
+<text class="lbl" font-size="14" transform="rotate(15 636 163)"><tspan x="636" y="154.9">Red</tspan><tspan x="636" y="171.0">Tent</tspan></text>
+<text class="lbl" font-size="14" transform="rotate(10 789 186)"><tspan x="789" y="177.9">Blue</tspan><tspan x="789" y="194.0">Tent</tspan></text>
+<text class="lbl" font-size="14" transform="rotate(-25 950 250)"><tspan x="950" y="241.9">Yellow</tspan><tspan x="950" y="258.1">Tent</tspan></text>
+<text class="lbl" font-size="14" transform="rotate(10 508 315)"><tspan x="508" y="306.9">Black</tspan><tspan x="508" y="323.1">Tent</tspan></text>
+<text class="lbl" font-size="14" transform="rotate(-35 636 410)"><tspan x="636" y="401.9">White</tspan><tspan x="636" y="418.1">Tent</tspan></text>
+<text class="lbl" font-size="14" transform="rotate(-25 875 432)"><tspan x="875" y="423.9">Grey</tspan><tspan x="875" y="440.1">Tent</tspan></text>
+<text class="lbl" font-size="14" transform="rotate(-35 606 598)"><tspan x="606" y="590.0">Green</tspan><tspan x="606" y="606.1">Tent</tspan></text>
+<text class="lbl" font-size="13" transform="rotate(-15 447 583)"><tspan x="447" y="583.0">Games Tent</tspan></text>
+<text class="lbl" font-size="13"><tspan x="1377.5" y="442.5">Kitchen</tspan></text>
+<text class="lbl" font-size="13"><tspan x="1277" y="850.0">Cabin</tspan><tspan x="1277" y="865.0">Bathroom</tspan></text>
+<text class="lbl" font-size="20"><tspan x="1554.5" y="220.0">Pier</tspan></text>
+<text class="zone" font-size="18"><tspan x="357" y="336.0">Female Toilets</tspan></text>
+<text class="zone" font-size="16"><tspan x="288" y="466.8">Female</tspan><tspan x="288" y="485.2">Toilets</tspan></text>
+<text class="zone" font-size="16"><tspan x="531" y="495.8">Male</tspan><tspan x="531" y="514.2">Toilets</tspan></text>
+<text class="zone" font-size="18"><tspan x="763" y="412.0">Reception</tspan></text>
+<text class="zone" font-size="20"><tspan x="1273" y="255.0">Picnic Area</tspan></text>
+<text class="zone" font-size="17" transform="rotate(-90 1055 415)"><tspan x="1055" y="415.0">North East Path</tspan></text>
+<text class="zone" font-size="18"><tspan x="972" y="730.0">Staff Storage Area</tspan></text>
+<text class="zone" font-size="20"><tspan x="752" y="832.0">Entrance</tspan></text>
+<text class="zone" font-size="13"><tspan x="495" y="770.0">Campfire A</tspan></text>
+<text class="zone" font-size="13"><tspan x="708" y="288.0">Campfire B</tspan></text>
+<text class="zone" font-size="18"><tspan x="1290" y="469.6">Cabin</tspan><tspan x="1290" y="490.3">Living Room</tspan></text>
+<text class="zone" font-size="17"><tspan x="1360" y="740.0">Cabin Bedroom</tspan></text>
+<text class="ft" x="1198" y="345">CABIN · GROUND</text>
+<text class="ft" x="1214" y="680">CABIN · UP</text>
+<g transform="translate(1490,700)">
+    <text x="0" y="0" class="ft" font-size="20">LEGEND</text>
+    <use href="#fuse" x="0" y="22" width="26" height="26"/><text class="legend" x="42" y="42">Fuse box (possible spot)</text>
+    <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
+    <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
+    <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
+    <text class="legend" x="42" y="163">Stairs</text></g>
+</g></svg>

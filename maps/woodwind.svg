@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1050" width="1600" height="1050" font-family="Inter, Segoe UI, Arial, sans-serif">
+<defs><symbol id="fuse" viewBox="0 0 28 28"><rect x="1.5" y="1.5" width="25" height="25" rx="5" fill="#2a2210" stroke="#f0b93a" stroke-width="2.5"/><path d="M16 4 L8 15 H13 L11 24 L20 12 H15 Z" fill="#f0b93a"/></symbol><style>
+  .floor { fill: #1d2530; stroke: #d5dde7; stroke-width: 4; stroke-linejoin: round; }
+  .outside { fill: #171d25; stroke: #5d6878; stroke-width: 2.5; stroke-linejoin: round; }
+  .void { fill: #10151b; stroke: #5d6878; stroke-width: 2; stroke-dasharray: 8 6; }
+  .solid { fill: #4a5462; stroke: #d5dde7; stroke-width: 3; }
+  .wall  { stroke: #d5dde7; stroke-width: 4; stroke-linecap: round; }
+  .furn  { fill: none; stroke: #4c596a; stroke-width: 2; }
+  .stair { fill: #283241; stroke: #8b98aa; stroke-width: 2; }
+  .tread { stroke: #8b98aa; stroke-width: 1.5; }
+  .win   { stroke: #5fb6ff; stroke-width: 6; stroke-linecap: round; }
+  .door  { stroke: #4fd394; stroke-width: 7; stroke-linecap: round; }
+  .lbl   { fill: #eef2f6; text-anchor: middle; dominant-baseline: middle; }
+  .zone  { fill: #c9d2dc; text-anchor: middle; dominant-baseline: middle; }
+  .ft    { fill: #7fd8cd; font-size: 26px; font-weight: 700; letter-spacing: 2px; }
+  .legend { fill: #c9d2dc; font-size: 18px; }
+</style></defs>
+<rect width="1600" height="1050" fill="#10151b"/>
+<text x="60" y="78" fill="#eef2f6" font-size="46" font-weight="700">Camp Woodwind</text>
+<text x="62" y="112" fill="#8d99a8" font-size="18">Small map · outdoor campsite</text>
+<g transform="translate(0,0)">
+<polygon class="outside" points="617,198 950,173 1045,225 1075,248 1240,225 1270,240 1365,380 1528,575 1510,740 1355,925 1230,968 1100,983 672,987 555,920 600,745 590,733 617,590"/>
+<circle class="floor" cx="1187" cy="633" r="35" style="fill:#4a2c14"/>
+<rect class="floor" x="1093" y="60" width="120" height="190" style="fill:#5a2a2a" transform="rotate(8 1153 155)"/>
+<rect class="floor" x="397.5" y="587.5" width="205" height="135" style="fill:#5a5226" transform="rotate(5 500 655)"/>
+<rect class="floor" x="720.5" y="417.5" width="135" height="185" style="fill:#26355a" transform="rotate(-8 788 510)"/>
+<rect class="floor" x="608" y="763" width="120" height="190" style="fill:#6b7078" transform="rotate(28 668 858)"/>
+<rect class="floor" x="1309.5" y="457" width="165" height="230" style="fill:#3a3f48" transform="rotate(-42 1392 572)"/>
+<rect class="floor" x="1315" y="690" width="140" height="210" style="fill:#3a3f48" transform="rotate(42 1385 795)"/>
+<rect class="floor" x="1275" y="169.5" width="160" height="185" style="fill:#2b333e" transform="rotate(-42 1355 262)"/>
+<rect class="floor" x="962.5" y="160.5" width="65" height="85" style="fill:#4f2d5a" transform="rotate(-20 995 203)"/>
+<rect class="floor" x="869.5" y="353" width="85" height="70" style="fill:#4f2d5a" transform="rotate(5 912 388)"/>
+<rect class="furn" x="725" y="318" width="130" height="75" transform="rotate(-5 790 355.5)"/>
+<rect class="furn" x="801" y="773" width="50" height="90" transform="rotate(25 826 818)"/>
+<rect class="furn" x="908" y="803" width="60" height="80" transform="rotate(10 938 843)"/>
+<line class="door" x1="987" y1="983" x2="1097" y2="983"/>
+<use href="#fuse" x="1319" y="387" width="28" height="28"/>
+<text class="lbl" font-size="20" transform="rotate(8 1153 155)"><tspan x="1153" y="143.5">Red</tspan><tspan x="1153" y="166.5">Tent</tspan></text>
+<text class="lbl" font-size="20" transform="rotate(5 500 655)"><tspan x="500" y="643.5">Yellow</tspan><tspan x="500" y="666.5">Tent</tspan></text>
+<text class="lbl" font-size="20" transform="rotate(-8 788 510)"><tspan x="788" y="498.5">Blue</tspan><tspan x="788" y="521.5">Tent</tspan></text>
+<text class="lbl" font-size="20" transform="rotate(28 668 858)"><tspan x="668" y="846.5">White</tspan><tspan x="668" y="869.5">Tent</tspan></text>
+<text class="lbl" font-size="20" transform="rotate(-42 1392 572)"><tspan x="1392" y="560.5">Food</tspan><tspan x="1392" y="583.5">Tent</tspan></text>
+<text class="lbl" font-size="20" transform="rotate(42 1385 795)"><tspan x="1385" y="783.5">Games</tspan><tspan x="1385" y="806.5">Tent</tspan></text>
+<text class="lbl" font-size="18" transform="rotate(-42 1355 262)"><tspan x="1355" y="262.0">Bathroom</tspan></text>
+<text class="zone" font-size="20"><tspan x="748" y="252.0">Lovers Bench</tspan></text>
+<text class="zone" font-size="20"><tspan x="1092" y="332.0">Kids Area</tspan></text>
+<text class="zone" font-size="20"><tspan x="1190" y="565.0">Campfire</tspan></text>
+<text class="zone" font-size="20"><tspan x="944" y="738.0">Picnic Area</tspan></text>
+<g transform="translate(60,800)">
+    <text x="0" y="0" class="ft" font-size="20">LEGEND</text>
+    <use href="#fuse" x="0" y="22" width="26" height="26"/><text class="legend" x="42" y="42">Fuse box (possible spot)</text>
+    <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
+    <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
+    <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
+    <text class="legend" x="42" y="163">Stairs</text></g>
+</g></svg>

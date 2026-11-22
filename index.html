@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Phasma Help</title>
+  <meta name="description" content="Fast Phasmophobia evidence journal: narrow down the ghost, time smudges and hunts, track sanity, share with your team.">
+  <meta name="theme-color" content="#10151b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Special+Elite&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/themes.css">
+  <script>
+    // apply the saved look before first paint (no flash)
+    try { document.documentElement.dataset.theme = JSON.parse(localStorage.getItem("phasma-help:fx") || "{}").theme || "spectral"; } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img class="logo" src="icons/icon.svg" alt="" width="34" height="34">
+      <h1>Phasma Help</h1>
+    </div>
+    <div class="topbar-actions">
+      <input id="search" type="search" placeholder="Search ghosts or tells…" aria-label="Search ghosts">
+      <button id="search-btn" class="btn phone-only" title="Search ghosts" aria-label="Search ghosts">🔍</button>
+      <button id="voice-btn" class="btn" title="Voice commands (V)"><span aria-hidden="true">🎤</span><span class="btn-text"> Voice</span></button>
+      <button id="map-btn" class="btn" title="Maps (M)"><span aria-hidden="true">🗺</span><span class="btn-text"> Maps</span></button>
+      <button id="wake-btn" class="btn" title="Keep the screen on" hidden><span aria-hidden="true">🔆</span><span class="btn-text"> Screen on</span></button>
+      <button id="install-btn" class="btn primary" hidden><span aria-hidden="true">⬇</span><span class="btn-text"> Install</span></button>
+      <button id="reset" class="btn danger" title="New case (Backspace)"><span aria-hidden="true">↺</span><span class="btn-text"> New case</span></button>
+      <button id="theme-btn" class="btn icon desk-only" title="Change look">🎨</button>
+      <button id="help-btn" class="btn icon" title="Settings and shortcuts (?)">⚙</button>
+    </div>
+  </header>
+
+  <div id="voice-bar" class="voice-bar" hidden>
+    <span class="dot"></span>
+    <span id="voice-status">Listening…</span>
+    <span id="voice-heard" class="voice-heard"></span>
+  </div>
+
+  <main class="layout">
+    <!-- LEFT: journal -->
+    <aside class="panel journal">
+      <section>
+        <h2>Difficulty</h2>
+        <div id="difficulty" class="seg"></div>
+      </section>
+
+      <section>
+        <h2>Evidence</h2>
+        <p class="hint">Tap = found · Hold or right-click = ruled out</p>
+        <div id="evidence" class="evidence-list"></div>
+      </section>
+
+      <section>
+        <h2>Best next test</h2>
+        <div id="suggest" class="suggest"></div>
+      </section>
+
+      <section>
+        <details class="obs-box">
+          <summary><h2>Behaviour seen</h2><span id="obs-count" class="obs-count"></span></summary>
+          <p class="hint">Tick what you saw. Ghosts that can't do it are ruled out.</p>
+          <div id="obs" class="obs-list"></div>
+        </details>
+      </section>
+
+      <section>
+        <h2>Ghost speed</h2>
+        <div id="speed-filter" class="chips"></div>
+        <div id="los-filter" class="chips"></div>
+      </section>
+
+      <section>
+        <h2>First hunt at</h2>
+        <div id="hunt-filter" class="chips"></div>
+      </section>
+
+      <section>
+        <h2>Weather</h2>
+        <select id="weather" class="select-full"></select>
+        <p id="weather-note" class="note"></p>
+      </section>
+    </aside>
+
+    <!-- CENTER: ghosts -->
+    <section class="ghosts-wrap">
+      <div id="quick-ev" class="quick-ev" aria-label="Evidence (tap: found, hold: ruled out)"></div>
+      <div class="status">
+        <div class="summary-wrap">
+          <div id="emf" class="emf" title="EMF meter: climbs as you narrow it down"></div>
+          <div id="summary" class="summary"></div>
+        </div>
+        <label class="toggle"><input id="hide-impossible" type="checkbox"> <span class="desk-txt">Hide ruled-out ghosts</span><span class="phone-txt">Hide out</span></label>
+      </div>
+      <div id="ghosts" class="ghost-grid"></div>
+    </section>
+
+    <!-- RIGHT: tools (tabbed) -->
+    <aside class="panel tools">
+      <div class="tabs" role="tablist">
+        <button class="tab on" data-tab="timers">Timers</button>
+        <button class="tab" data-tab="speed">Speed</button>
+        <button class="tab" data-tab="sanity">Sanity</button>
+        <button class="tab" data-tab="team">Team</button>
+        <button class="tab" data-tab="log">Log</button>
+      </div>
+
+      <!-- Case log -->
+      <div class="tab-body" data-body="log" hidden>
+        <section>
+          <div class="case-head">
+            <div><small>Case time</small><span id="case-clock">0:00</span></div>
+            <div><small>Ghosts left</small><span id="case-left">–</span></div>
+          </div>
+          <div class="row">
+            <button id="case-share" class="btn small primary">📋 Share case</button>
+            <button id="case-clear" class="btn small">Clear log</button>
+          </div>
+          <p id="case-msg" class="note"></p>
+        </section>
+        <section>
+          <h3>Timeline</h3>
+          <ol id="case-log" class="case-log"></ol>
+        </section>
+      </div>
+
+      <!-- Timers -->
+      <div class="tab-body" data-body="timers">
+        <section>
+          <h3>Smudge <kbd>S</kbd></h3>
+          <div class="timer" id="t-smudge"></div>
+        </section>
+        <section>
+          <h3>Hunt cooldown <kbd>C</kbd></h3>
+          <div class="timer" id="t-cooldown"></div>
+        </section>
+        <section>
+          <h3>Hunt length <kbd>H</kbd></h3>
+          <div class="timer" id="t-hunt"></div>
+        </section>
+        <p class="hint">Click a clock (or press its key) to start / stop.</p>
+      </div>
+
+      <!-- Speed -->
+      <div class="tab-body" data-body="speed" hidden>
+        <section>
+          <h3>Footstep tapper <kbd>T</kbd></h3>
+          <p class="hint">Tap along with the footsteps during a hunt.</p>
+          <button id="tap" class="tap-btn">TAP</button>
+          <div class="tap-read">
+            <div><span id="bpm">–</span><small>BPM</small></div>
+            <div><span id="ms">–</span><small>m/s</small></div>
+          </div>
+          <label class="field">Ghost speed setting
+            <select id="speed-mult">
+              <option value="0.5">50%</option>
+              <option value="0.75">75%</option>
+              <option value="1" selected>100%</option>
+              <option value="1.25">125%</option>
+              <option value="1.5">150%</option>
+            </select>
+          </label>
+          <div class="row">
+            <button id="tap-reset" class="btn small">Clear</button>
+            <button id="calibrate" class="btn small" title="Tap a normal-speed ghost, then press this to set it as 1.7 m/s">Calibrate as 1.7 m/s</button>
+          </div>
+          <p id="speed-match" class="note"></p>
+        </section>
+      </div>
+
+      <!-- Sanity -->
+      <div class="tab-body" data-body="sanity" hidden>
+        <section>
+          <div class="sanity-big"><span id="san-value">100</span><small>% average sanity</small></div>
+          <div id="san-bar" class="san-bar"></div>
+          <div class="row">
+            <button id="san-run" class="btn small primary">▶ Lights off (drain)</button>
+            <button id="san-pill" class="btn small">💊 Pill</button>
+            <button id="san-reset" class="btn small">Reset</button>
+          </div>
+          <div class="row">
+            <button class="btn small" data-san="-10" title="Walking through a ghost event">Ghost event −10</button>
+            <button class="btn small" data-san="-15" title="Yurei door ability">Yurei −15</button>
+            <button class="btn small" data-san="-25" title="Jinn fuse box ability">Jinn −25</button>
+            <button class="btn small" data-san="-5">−5</button>
+            <button class="btn small" data-san="5">+5</button>
+          </div>
+        </section>
+        <section>
+          <h3>Could hunt now</h3>
+          <p id="san-hunters" class="note"></p>
+        </section>
+        <section>
+          <h3>Settings</h3>
+          <label class="field">Lobby
+            <select id="san-lobby"><option value="solo">Solo</option><option value="multi">Multiplayer</option></select>
+          </label>
+          <label class="field">Map size
+            <select id="san-size"><option value="small">Small</option><option value="medium">Medium</option><option value="large">Large</option></select>
+          </label>
+          <label class="field">Starting sanity
+            <select id="san-start"><option>100</option><option>75</option><option>50</option><option>25</option><option>0</option></select>
+          </label>
+          <label class="field">Drain speed
+            <select id="san-drain"><option value="0">0%</option><option value="0.5">50%</option><option value="1" selected>100%</option><option value="1.5">150%</option><option value="2">200%</option></select>
+          </label>
+          <label class="field">Pill restores
+            <select id="san-pillamt">
+              <option>0</option><option>5</option><option>10</option><option>20</option><option>25</option><option>30</option>
+              <option>35</option><option selected>40</option><option>45</option><option>50</option><option>75</option><option>100</option>
+            </select>
+          </label>
+          <label class="field">Drain in dark (%/s)
+            <input id="san-rate" type="number" step="0.01" min="0" class="num">
+          </label>
+          <p class="hint">Drain rates are approximate. Adjust them if your game differs.</p>
+        </section>
+      </div>
+
+      <!-- Team -->
+      <div class="tab-body" data-body="team" hidden>
+        <section>
+          <h3>Shared journal</h3>
+          <p class="hint">Everyone in the room sees the same evidence, filters and ghost marks live.</p>
+          <div id="sync-idle">
+            <button id="sync-create" class="btn primary wide">Create room</button>
+            <div class="row join-row">
+              <input id="sync-code" placeholder="Room code" maxlength="6" autocomplete="off">
+              <button id="sync-join" class="btn">Join</button>
+            </div>
+          </div>
+          <div id="sync-live" hidden>
+            <div class="room-code"><small>Room code</small><span id="sync-room"></span></div>
+            <p id="sync-peers" class="note"></p>
+            <div class="row">
+              <button id="sync-copy" class="btn small">Copy invite link</button>
+              <button id="sync-leave" class="btn small danger">Leave</button>
+            </div>
+          </div>
+          <p id="sync-msg" class="note"></p>
+        </section>
+        <section>
+          <h3>Voice commands <kbd>V</kbd></h3>
+          <p class="hint">Works in Chrome and Edge. Say things like:</p>
+          <ul class="examples">
+            <li>“EMF five” · “no orbs” · “clear writing”</li>
+            <li>“nightmare” · “two evidence”</li>
+            <li>“rule out wraith” · “guess demon”</li>
+            <li>“smudge” · “cooldown” · “hunt”</li>
+            <li>“speed fast” · “clear speed”</li>
+            <li>“open map prison” · “close map”</li>
+            <li>“sanity pill” · “reset journal”</li>
+          </ul>
+          <label class="toggle"><input id="voice-wake" type="checkbox"> Only react after “journal …”</label>
+        </section>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Phone: running timers float above the nav -->
+  <div id="timer-dock" class="timer-dock" aria-live="polite"></div>
+
+  <!-- Phone navigation -->
+  <nav class="bottom-nav" aria-label="Sections">
+    <button data-view="journal"><span>📓</span>Journal</button>
+    <button data-view="ghosts" class="on"><span>👻</span>Ghosts<b id="nav-count"></b></button>
+    <button data-view="tools"><span>⏱</span>Tools</button>
+    <button data-view="maps"><span>🗺</span>Maps</button>
+  </nav>
+
+  <dialog id="maps" class="maps-dialog">
+    <div class="maps-layout">
+      <nav class="map-list">
+        <h2>Maps</h2>
+        <div id="map-list"></div>
+      </nav>
+      <div class="map-main">
+        <div class="map-bar">
+          <div>
+            <h2 id="map-title">Map</h2>
+            <span id="map-meta" class="hint"></span>
+          </div>
+          <div class="row">
+            <button id="map-zoom-out" class="btn small" title="Zoom out (-)">−</button>
+            <button id="map-zoom-reset" class="btn small" title="Fit (0)">Fit</button>
+            <button id="map-zoom-in" class="btn small" title="Zoom in (+)">+</button>
+            <button id="map-clear-pins" class="btn small" title="Remove your marks on this map">Clear marks</button>
+            <button id="map-close" class="btn small" title="Close (Esc)">✕</button>
+          </div>
+        </div>
+        <div id="map-view" class="map-view">
+          <div id="map-stage" class="map-stage">
+            <img id="map-img" alt="" draggable="false">
+            <div id="map-pins"></div>
+          </div>
+          <div id="map-missing" class="map-missing" hidden></div>
+        </div>
+        <p class="hint">Pinch or scroll to zoom · drag to pan · double-tap to drop a mark · tap a mark to change it · hold or right-click to delete</p>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="help">
+    <h2>Settings</h2>
+    <div class="settings">
+      <div class="set-row">
+        <span>Look</span>
+        <div id="theme-pick" class="theme-pick">
+          <button data-theme="spectral"><i class="sw sw-spectral"></i>Spectral</button>
+          <button data-theme="nightvision"><i class="sw sw-nv"></i>Night Vision</button>
+          <button data-theme="journal"><i class="sw sw-journal"></i>Field Journal</button>
+        </div>
+      </div>
+      <label class="set-row toggle"><span>Sound effects</span><input id="set-sound" type="checkbox"></label>
+      <label class="set-row toggle"><span>Vibration (phones)</span><input id="set-haptics" type="checkbox" checked></label>
+    </div>
+    <h2 class="desk-only">Shortcuts</h2>
+    <table class="desk-only">
+      <tr><td><kbd>1</kbd>–<kbd>7</kbd></td><td>Cycle evidence (unknown → found → ruled out)</td></tr>
+      <tr><td><kbd>Shift</kbd> + <kbd>1</kbd>–<kbd>7</kbd></td><td>Mark evidence as ruled out</td></tr>
+      <tr><td><kbd>S</kbd> <kbd>C</kbd> <kbd>H</kbd></td><td>Smudge, cooldown, hunt timer</td></tr>
+      <tr><td><kbd>T</kbd></td><td>Tap footstep</td></tr>
+      <tr><td><kbd>M</kbd></td><td>Maps</td></tr>
+      <tr><td><kbd>V</kbd></td><td>Voice commands on / off</td></tr>
+      <tr><td><kbd>/</kbd></td><td>Search ghosts</td></tr>
+      <tr><td><kbd>Backspace</kbd></td><td>Reset journal</td></tr>
+    </table>
+    <p class="hint">On ghost cards: <b>✕</b> rules a ghost out by hand, <b>★</b> marks your guess.</p>
+    <form method="dialog"><button class="btn">Close</button></form>
+  </dialog>
+
+  <footer class="foot">
+    Fan-made helper, not affiliated with Kinetic Games.
+    Ghost data based on the <a href="https://phasmophobia.fandom.com/wiki/Phasmophobia_Wiki" target="_blank" rel="noopener">Phasmophobia Wiki</a> and in-game testing.
+  </footer>
+
+  <script src="js/ghosts.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/maps.js"></script>
+  <script src="js/tools.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/sync.js"></script>
+  <script src="js/log.js"></script>
+  <script src="js/mobile.js"></script>
+  <script src="js/fx.js"></script>
+</body>
+</html>
