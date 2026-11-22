@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1380 860" width="1380" height="860" font-family="Inter, Segoe UI, Arial, sans-serif">
+<defs><symbol id="fuse" viewBox="0 0 28 28"><rect x="1.5" y="1.5" width="25" height="25" rx="5" fill="#2a2210" stroke="#f0b93a" stroke-width="2.5"/><path d="M16 4 L8 15 H13 L11 24 L20 12 H15 Z" fill="#f0b93a"/></symbol><style>
+  .floor { fill: #1d2530; stroke: #d5dde7; stroke-width: 4; stroke-linejoin: round; }
+  .outside { fill: #171d25; stroke: #5d6878; stroke-width: 2.5; stroke-linejoin: round; }
+  .void { fill: #10151b; stroke: #5d6878; stroke-width: 2; stroke-dasharray: 8 6; }
+  .solid { fill: #4a5462; stroke: #d5dde7; stroke-width: 3; }
+  .wall  { stroke: #d5dde7; stroke-width: 4; stroke-linecap: round; }
+  .furn  { fill: none; stroke: #4c596a; stroke-width: 2; }
+  .stair { fill: #283241; stroke: #8b98aa; stroke-width: 2; }
+  .tread { stroke: #8b98aa; stroke-width: 1.5; }
+  .win   { stroke: #5fb6ff; stroke-width: 6; stroke-linecap: round; }
+  .door  { stroke: #4fd394; stroke-width: 7; stroke-linecap: round; }
+  .lbl   { fill: #eef2f6; text-anchor: middle; dominant-baseline: middle; }
+  .zone  { fill: #c9d2dc; text-anchor: middle; dominant-baseline: middle; }
+  .ft    { fill: #7fd8cd; font-size: 26px; font-weight: 700; letter-spacing: 2px; }
+  .legend { fill: #c9d2dc; font-size: 18px; }
+</style></defs>
+<rect width="1380" height="860" fill="#10151b"/>
+<text x="60" y="78" fill="#eef2f6" font-size="46" font-weight="700">Nell's Diner</text>
+<text x="62" y="112" fill="#8d99a8" font-size="18">Small map · 1 floor</text>
+<g transform="translate(200,80)">
+<polygon class="floor" points="265,62 325,62 325,345 155,345 155,282 265,282"/>
+<polygon class="floor" points="325,62 495,62 495,170 383,170 383,110 325,110"/>
+<polygon class="floor" points="325,170 612,170 612,285 552,285 552,228 325,228"/>
+<polygon class="floor" points="385,340 552,340 552,285 612,285 612,452 385,452"/>
+<rect class="floor" x="155" y="62" width="110" height="108"/>
+<rect class="floor" x="155" y="172" width="110" height="110"/>
+<rect class="floor" x="325" y="110" width="58" height="60"/>
+<rect class="floor" x="495" y="62" width="117" height="108"/>
+<rect class="floor" x="325" y="228" width="60" height="117"/>
+<rect class="floor" x="385" y="228" width="107" height="112"/>
+<rect class="floor" x="492" y="228" width="60" height="112"/>
+<rect class="floor" x="155" y="345" width="230" height="277"/>
+<rect class="floor" x="385" y="452" width="227" height="170"/>
+<rect class="floor" x="290" y="622" width="60" height="66"/>
+<rect class="furn" x="262" y="410" width="8" height="140"/>
+<rect class="furn" x="400" y="512" width="165" height="20"/>
+<line class="win" x1="155" y1="395" x2="155" y2="455"/>
+<line class="win" x1="155" y1="500" x2="155" y2="560"/>
+<line class="win" x1="175" y1="622" x2="270" y2="622"/>
+<line class="win" x1="400" y1="622" x2="590" y2="622"/>
+<line class="win" x1="612" y1="470" x2="612" y2="600"/>
+<line class="win" x1="190" y1="62" x2="235" y2="62"/>
+<line class="win" x1="520" y1="62" x2="590" y2="62"/>
+<line class="door" x1="298" y1="688" x2="342" y2="688"/>
+<line class="door" x1="612" y1="240" x2="612" y2="268"/>
+<use href="#fuse" x="359" y="236" width="28" height="28"/>
+<use href="#fuse" x="551" y="239" width="28" height="28"/>
+<use href="#fuse" x="583" y="476" width="28" height="28"/>
+<g><title>Summoning circle</title><circle cx="240" cy="150" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="240" y="151" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g>
+<g><title>Mirror</title><circle cx="470" cy="95" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="470" y="96" font-size="16" text-anchor="middle" dominant-baseline="middle">🪞</text></g>
+<g><title>Music box</title><circle cx="592" cy="152" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="592" y="153" font-size="16" text-anchor="middle" dominant-baseline="middle">🎵</text></g>
+<g><title>Ouija</title><circle cx="355" cy="328" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="355" y="329" font-size="16" text-anchor="middle" dominant-baseline="middle">🔤</text></g>
+<g><title>Monkey paw</title><circle cx="578" cy="395" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="578" y="396" font-size="16" text-anchor="middle" dominant-baseline="middle">🐒</text></g>
+<g><title>Voodoo doll</title><circle cx="178" cy="405" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="178" y="406" font-size="16" text-anchor="middle" dominant-baseline="middle">🪡</text></g>
+<g><title>Tarot</title><circle cx="437" cy="475" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="437" y="476" font-size="16" text-anchor="middle" dominant-baseline="middle">🃏</text></g>
+<text class="lbl" font-size="16"><tspan x="210" y="106.8">Men's</tspan><tspan x="210" y="125.2">Bathroom</tspan></text>
+<text class="lbl" font-size="16"><tspan x="210" y="217.8">Women's</tspan><tspan x="210" y="236.2">Bathroom</tspan></text>
+<text class="lbl" font-size="12"><tspan x="354" y="133.1">Staff</tspan><tspan x="354" y="146.9">WC</tspan></text>
+<text class="lbl" font-size="16"><tspan x="553.5" y="106.8">Manager's</tspan><tspan x="553.5" y="125.2">Office</tspan></text>
+<text class="lbl" font-size="12"><tspan x="355" y="279.6">Janitor's</tspan><tspan x="355" y="293.4">Closet</tspan></text>
+<text class="lbl" font-size="17"><tspan x="438.5" y="284.0">Storage</tspan></text>
+<text class="lbl" font-size="13"><tspan x="522" y="284.0">Cooler</tspan></text>
+<text class="lbl" font-size="20"><tspan x="270" y="483.5">Dining Area</tspan></text>
+<text class="lbl" font-size="13"><tspan x="320" y="655.0">Foyer</tspan></text>
+<text class="zone" font-size="15"><tspan x="230" y="314.0">Hallway</tspan></text>
+<text class="zone" font-size="16"><tspan x="440" y="140.0">Break Room</tspan></text>
+<text class="zone" font-size="16"><tspan x="470" y="200.0">Staff Hallway</tspan></text>
+<text class="zone" font-size="19"><tspan x="498" y="400.0">Kitchen</tspan></text>
+<text class="zone" font-size="18"><tspan x="498" y="580.0">Counter Area</tspan></text>
+<text class="ft" x="155" y="45">GROUND FLOOR</text>
+<g transform="translate(700,160)">
+    <text x="0" y="0" class="ft" font-size="20">LEGEND</text>
+    <use href="#fuse" x="0" y="22" width="26" height="26"/><text class="legend" x="42" y="42">Fuse box (possible spot)</text>
+    <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
+    <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
+    <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
+    <text class="legend" x="42" y="163">Stairs</text>
+    <g><title>Summoning circle</title><circle cx="13" cy="200" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="13" y="201" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g><text class="legend" x="42" y="206">Cursed object spot</text>
+    <text class="legend" x="0" y="240" font-size="15">🔤 Ouija  ·  🎵 Music box  ·  🃏 Tarot  ·  🐒 Monkey paw</text>
+    <text class="legend" x="0" y="264" font-size="15">🪞 Mirror  ·  🪡 Voodoo doll  ·  ⭐ Summoning circle</text></g>
+</g></svg>

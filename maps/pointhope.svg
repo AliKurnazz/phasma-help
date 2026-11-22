@@ -49,6 +49,13 @@
 <use href="#fuse" x="766" y="133" width="28" height="28"/>
 <use href="#fuse" x="1242" y="380" width="28" height="28"/>
 <use href="#fuse" x="1166" y="686" width="28" height="28"/>
+<g><title>Tarot</title><circle cx="525" cy="400" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="525" y="401" font-size="16" text-anchor="middle" dominant-baseline="middle">🃏</text></g>
+<g><title>Mirror</title><circle cx="1355" cy="108" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1355" y="109" font-size="16" text-anchor="middle" dominant-baseline="middle">🪞</text></g>
+<g><title>Ouija</title><circle cx="186" cy="700" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="186" y="701" font-size="16" text-anchor="middle" dominant-baseline="middle">🔤</text></g>
+<g><title>Summoning circle</title><circle cx="567" cy="694" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="567" y="695" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g>
+<g><title>Music box</title><circle cx="938" cy="610" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="938" y="611" font-size="16" text-anchor="middle" dominant-baseline="middle">🎵</text></g>
+<g><title>Voodoo doll</title><circle cx="1420" cy="612" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1420" y="613" font-size="16" text-anchor="middle" dominant-baseline="middle">🪡</text></g>
+<g><title>Monkey paw</title><circle cx="452" cy="966" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="452" y="967" font-size="16" text-anchor="middle" dominant-baseline="middle">🐒</text></g>
 <text class="lbl" font-size="15"><tspan x="72.5" y="184.4">Entry</tspan><tspan x="72.5" y="201.6">Bathroom</tspan></text>
 <text class="lbl" font-size="26"><tspan x="510" y="222.1">Living</tspan><tspan x="510" y="252.0">Room</tspan></text>
 <text class="lbl" font-size="26"><tspan x="918" y="237.0">Kitchen</tspan></text>
@@ -80,5 +87,8 @@
     <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
     <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
     <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
-    <text class="legend" x="42" y="163">Stairs</text></g>
+    <text class="legend" x="42" y="163">Stairs</text>
+    <g><title>Summoning circle</title><circle cx="13" cy="200" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="13" y="201" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g><text class="legend" x="42" y="206">Cursed object spot</text>
+    <text class="legend" x="0" y="240" font-size="15">🔤 Ouija  ·  🎵 Music box  ·  🃏 Tarot  ·  🐒 Monkey paw</text>
+    <text class="legend" x="0" y="264" font-size="15">🪞 Mirror  ·  🪡 Voodoo doll  ·  ⭐ Summoning circle</text></g>
 </g></svg>

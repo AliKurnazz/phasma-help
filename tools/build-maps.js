@@ -38,6 +38,14 @@ const STYLE = `
   .ft    { fill: #7fd8cd; font-size: 26px; font-weight: 700; letter-spacing: 2px; }
   .legend { fill: #c9d2dc; font-size: 18px; }
 `;
+// Cursed possession spawn spots: purple badge with the item's icon.
+const CURSED_ICONS = { ouija: "🔤", music: "🎵", tarot: "🃏", paw: "🐒", mirror: "🪞", doll: "🪡", circle: "⭐" };
+const CURSED_NAMES = { ouija: "Ouija", music: "Music box", tarot: "Tarot", paw: "Monkey paw", mirror: "Mirror", doll: "Voodoo doll", circle: "Summoning circle" };
+const CURSED_KEY = Object.keys(CURSED_ICONS).map((k) => `${CURSED_ICONS[k]} ${CURSED_NAMES[k]}`);
+const cursedBadge = (x, y, type) =>
+  `<g><title>${CURSED_NAMES[type]}</title><circle cx="${x}" cy="${y}" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/>` +
+  `<text x="${x}" y="${y + 1}" font-size="16" text-anchor="middle" dominant-baseline="middle">${CURSED_ICONS[type]}</text></g>`;
+
 const FUSE = `<symbol id="fuse" viewBox="0 0 28 28"><rect x="1.5" y="1.5" width="25" height="25" rx="5" fill="#2a2210" stroke="#f0b93a" stroke-width="2.5"/><path d="M16 4 L8 15 H13 L11 24 L20 12 H15 Z" fill="#f0b93a"/></symbol>`;
 
 function text(x, y, label, size, cls = "lbl", rot = 0, extra = "") {
@@ -80,6 +88,7 @@ function build(m) {
   (m.win || []).forEach(([a, b, c, d]) => g.push(`<line class="win" x1="${a}" y1="${b}" x2="${c}" y2="${d}"/>`));
   (m.door || []).forEach(([a, b, c, d]) => g.push(`<line class="door" x1="${a}" y1="${b}" x2="${c}" y2="${d}"/>`));
   (m.fuse || []).forEach(([x, y]) => g.push(`<use href="#fuse" x="${x - 14}" y="${y - 14}" width="28" height="28"/>`));
+  (m.cursed || []).forEach(([x, y, type]) => g.push(cursedBadge(x, y, type)));
   // labels last so they sit on top
   (m.rooms || []).forEach((r) => {
     if (!r.label) return;
@@ -105,7 +114,10 @@ function build(m) {
     <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
     <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
     <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
-    <text class="legend" x="42" y="163">Stairs</text></g>`);
+    <text class="legend" x="42" y="163">Stairs</text>
+    ${cursedBadge(13, 200, "circle")}<text class="legend" x="42" y="206">Cursed object spot</text>
+    <text class="legend" x="0" y="240" font-size="15">${esc(CURSED_KEY.slice(0, 4).join("  ·  "))}</text>
+    <text class="legend" x="0" y="264" font-size="15">${esc(CURSED_KEY.slice(4).join("  ·  "))}</text></g>`);
   out.push(`</g></svg>`);
   return out.join("\n");
 }
@@ -281,7 +293,7 @@ MAPS.push({
       R(697, 445, 75, 80, ""),
       R(210, 525, 562, 42, "Ground Floor Corridor", { size: 16 }),
       ...row([210, 287, 360, 435], 567, 83, ["Classroom\n3", "Classroom\n2", "Classroom\n1"], 13),
-      R(435, 567, 115, 165, "Lobby"),
+      R(435, 567, 115, 165, ""),
       ...row([550, 625, 697, 772], 567, 83, ["Library", "Classroom\n4", "Classroom\n5"], 13),
       // upstairs
       ...column(977, 73, U, ["Classroom\n37", "Classroom\n36", "Classroom\n35", "Classroom\n34", "Classroom\n33", "Classroom\n32"], 14),
@@ -302,7 +314,7 @@ MAPS.push({
       ...row([1428, 1503, 1577, 1650], 567, 83, ["Classroom\n23", "Classroom\n24", "Classroom\n25"], 13),
     ],
     stairs: [[210, 485, 77, 40, "h"], [697, 485, 75, 40, "h"], [1088, 485, 77, 40, "h"], [1577, 485, 73, 40, "h"]],
-    labels: [[191, 400, "Corridor", 14, -90], [791, 400, "Corridor", 14, -90], [1069, 400, "Corridor", 14, -90], [1670, 400, "Corridor", 14, -90]],
+    labels: [[492, 708, "Lobby", 18], [191, 400, "Corridor", 14, -90], [791, 400, "Corridor", 14, -90], [1069, 400, "Corridor", 14, -90], [1670, 400, "Corridor", 14, -90]],
     door: [[478, 732, 508, 732]],
     fuse: [[222, 461], [708, 460], [1152, 352], [1588, 352]],
     floors: [[98, 142, "GROUND FLOOR"], [977, 142, "UPSTAIRS"]],
@@ -357,7 +369,7 @@ MAPS.push({
   const five = (xs, y, h, prefix, size) => xs.map((x, i) => R(x, y, 50, h, `${prefix}\n${5 - i}`, { size, rot: 0 }));
   const fiveF = (xs, y, h, prefix, size) => xs.map((x, i) => R(x, y, 50, h, `${prefix}\n${i + 1}`, { size }));
   MAPS.push({
-    id: "sunny", name: "Sunny Meadows Mental Institution", sub: "Large map · 2 floors", titleSize: 38, w: 1900, h: 1080, legend: [1250, 640],
+    id: "sunny", name: "Sunny Meadows Mental Institution", sub: "Large map · 2 floors", titleSize: 38, w: 1900, h: 1080, legend: [1330, 90],
     rooms: [
       // ground floor: west
       R(185, 537, 555, 58, "Male Wing"), R(86, 418, 99, 100, "Male\nDorm", { size: 15 }), R(86, 525, 99, 112, "Male\nDay Room", { size: 15 }),
@@ -365,7 +377,7 @@ MAPS.push({
       ...five([390, 447, 505, 563, 620], 471, 66, "Male", 12),
       // centre ring
       R(738, 215, 435, 380, ""), R(772, 250, 368, 175, "Courtyard", { cls: "outside" }),
-      R(868, 435, 270, 103, "Chapel"), R(787, 495, 52, 40, "Infirmary", { size: 10 }),
+      R(868, 435, 270, 103, ""), R(787, 495, 52, 40, "Infirmary", { size: 10 }),
       R(855, 537, 200, 50, "Entrance Corridor", { size: 14 }),
       R(902, 28, 115, 187, "Kitchen"), R(830, 28, 72, 92, "Scullery", { size: 13 }), R(830, 120, 72, 95, "Servants\nDining", { size: 13 }),
       R(1017, 28, 70, 92, "Boiler\nhouse", { size: 12 }), R(1017, 120, 70, 95, "Bake\nhouse", { size: 12 }),
@@ -399,7 +411,7 @@ MAPS.push({
     ],
     stairs: [[247, 475, 58, 58, "v"], [1606, 475, 58, 58, "v"], [873, 590, 59, 54, "h"], [246, 831, 59, 59, "v"],
       [1606, 831, 59, 59, "v"], [873, 950, 59, 52, "h"]],
-    labels: [[955, 232, "Courtyard Corridor", 15]],
+    labels: [[955, 232, "Courtyard Corridor", 15], [1003, 466, "Chapel", 20]],
     door: [[943, 777, 967, 777]],
     fuse: [[1033, 113], [956, 412], [928, 716], [1183, 505], [942, 983]],
     floors: [[86, 400, "GROUND FLOOR"], [86, 810, "BASEMENT"]],
@@ -478,6 +490,79 @@ MAPS.push({
 });
 
 // =====================================================================
+// ---------- Nell's Diner ----------
+MAPS.push({
+  id: "nells", name: "Nell's Diner", sub: "Small map · 1 floor", w: 1380, h: 860, shift: [200, 80], legend: [700, 160],
+  polys: [
+    P("265,62 325,62 325,345 155,345 155,282 265,282"),                 // hallway
+    P("325,62 495,62 495,170 383,170 383,110 325,110"),                 // break room
+    P("325,170 612,170 612,285 552,285 552,228 325,228"),               // staff hallway
+    P("385,340 552,340 552,285 612,285 612,452 385,452"),               // kitchen
+  ],
+  rooms: [
+    R(155, 62, 110, 108, "Men's\nBathroom", { size: 16 }), R(155, 172, 110, 110, "Women's\nBathroom", { size: 16 }),
+    R(325, 110, 58, 60, "Staff\nWC", { size: 12 }), R(495, 62, 117, 108, "Manager's\nOffice", { size: 16 }),
+    R(325, 228, 60, 117, "Janitor's\nCloset", { size: 12 }), R(385, 228, 107, 112, "Storage", { size: 17 }),
+    R(492, 228, 60, 112, "Cooler", { size: 13 }),
+    R(155, 345, 230, 277, "Dining Area"), R(385, 452, 227, 170, ""),
+    R(290, 622, 60, 66, "Foyer", { size: 13 }),
+  ],
+  furn: [[262, 410, 8, 140], [400, 512, 165, 20]],
+  labels: [[230, 314, "Hallway", 15], [440, 140, "Break Room", 16], [470, 200, "Staff Hallway", 16], [498, 400, "Kitchen", 19], [498, 580, "Counter Area", 18]],
+  win: [[155, 395, 155, 455], [155, 500, 155, 560], [175, 622, 270, 622], [400, 622, 590, 622], [612, 470, 612, 600], [190, 62, 235, 62], [520, 62, 590, 62]],
+  door: [[298, 688, 342, 688], [612, 240, 612, 268]],
+  fuse: [[373, 250], [565, 253], [597, 490]],
+  floors: [[155, 45, "GROUND FLOOR"]],
+});
+
+// ---------- Sunny Meadows Restricted ----------
+MAPS.push({
+  id: "restricted", name: "Sunny Meadows Restricted", sub: "Medium map · 1 floor (part of Sunny Meadows)", titleSize: 40,
+  w: 1420, h: 950, legend: [60, 640],
+  outside: [R(512, 235, 400, 195), R(512, 430, 88, 125), R(390, 512, 78, 38), R(955, 352, 78, 70), R(610, 612, 80, 75), R(732, 612, 78, 75)],
+  polys: [P("470,195 955,195 955,610 470,610 470,195 512,195 512,555 912,555 912,235 512,235 512,195")],
+  rooms: [
+    R(905, 42, 110, 150, "Laundry\nRoom", { size: 16 }),
+    R(512, 235, 400, 195, "Courtyard", { cls: "outside" }),
+    R(600, 440, 312, 115, ""), R(522, 505, 58, 45, "Infirmary", { size: 11 }),
+    R(600, 555, 220, 55, "Entrance Corridor", { size: 15 }),
+    R(390, 212, 78, 70, "West Foul\nLinen", { size: 12 }), R(390, 285, 78, 145, "Classroom", { size: 13 }),
+    R(390, 438, 78, 72, "West\nVisitors", { size: 13 }),
+    R(955, 212, 78, 70, "East Foul\nLinen", { size: 12 }), R(955, 288, 78, 62, "Servants'\nRoom 2", { size: 12 }),
+    R(955, 428, 78, 68, "East\nVisitors", { size: 13 }), R(955, 500, 78, 50, ""),
+    R(693, 610, 35, 80, ""),
+    R(540, 688, 130, 100, "Manager's\nOffice", { size: 16 }), R(670, 688, 80, 207, ""), R(750, 688, 130, 100, "Waiting\nRoom", { size: 16 }),
+  ],
+  stairs: [[738, 618, 66, 62, "v"]],
+  labels: [[712, 215, "Courtyard Corridor", 16], [756, 470, "Chapel", 20], [491, 400, "Corridor", 14, -90], [934, 400, "Corridor", 14, -90], [710, 850, "Foyer", 16], [994, 512, "Utility", 12]],
+  door: [[690, 895, 730, 895]],
+  fuse: [[712, 420], [994, 536], [682, 763]],
+  floors: [[390, 170, "GROUND FLOOR"]],
+});
+
+// Cursed possession spots per map (same coordinates as the map shapes).
+const CURSED_SPOTS = {
+  nells:      [[240, 150, "circle"], [470, 95, "mirror"], [592, 152, "music"], [355, 328, "ouija"], [578, 395, "paw"], [178, 405, "doll"], [437, 475, "tarot"]],
+  restricted: [[640, 528, "ouija"], [676, 528, "music"], [712, 528, "circle"], [748, 528, "doll"], [784, 528, "paw"], [820, 528, "mirror"], [856, 528, "tarot"]], // all in the Chapel
+  willow:     [[1384, 150, "doll"], [1167, 440, "paw"], [814, 598, "ouija"], [307, 630, "circle"], [1126, 890, "tarot"], [1028, 930, "music"], [728, 651, "mirror"]],
+  edgefield:  [[478, 218, "ouija"], [541, 404, "music"], [700, 487, "mirror"], [676, 521, "tarot"], [1345, 232, "paw"], [990, 500, "doll"], [1090, 706, "circle"]],
+  tanglewood: [[896, 165, "tarot"], [1125, 318, "paw"], [648, 468, "mirror"], [604, 500, "music"], [1125, 548, "doll"], [1298, 182, "circle"], [1341, 405, "ouija"]],
+  bleasdale:  [[484, 198, "music"], [160, 408, "ouija"], [195, 470, "mirror"], [263, 492, "tarot"], [865, 245, "paw"], [904, 485, "doll"], [1048, 910, "circle"]],
+  grafton:    [[467, 515, "mirror"], [879, 270, "ouija"], [372, 628, "tarot"], [592, 603, "music"], [662, 654, "paw"], [1073, 686, "doll"], [1530, 288, "circle"]],
+  brownstone: [[452, 590, "ouija"], [492, 590, "circle"], [532, 590, "mirror"], [452, 628, "tarot"], [492, 628, "doll"], [532, 628, "paw"], [492, 666, "music"]], // all in the Lobby
+  prison:     [[1259, 722, "circle"], [1261, 777, "mirror"], [1245, 880, "doll"], [1245, 918, "ouija"]],
+  sunny:      [[885, 518, "ouija"], [921, 518, "music"], [957, 518, "circle"], [993, 518, "doll"], [1029, 518, "paw"], [1065, 518, "mirror"], [1101, 518, "tarot"]], // all in the Chapel
+  maple:      [[1166, 190, "tarot"], [737, 262, "music"], [426, 396, "ouija"], [962, 552, "paw"], [686, 682, "mirror"], [474, 662, "doll"], [1373, 566, "circle"]],
+  woodwind:   [[1038, 245, "doll"], [835, 330, "paw"], [590, 617, "music"], [1347, 500, "circle"], [995, 580, "mirror"], [822, 836, "tarot"], [1420, 818, "ouija"]],
+  pointhope:  [[525, 400, "tarot"], [1355, 108, "mirror"], [186, 700, "ouija"], [567, 694, "circle"], [938, 610, "music"], [1420, 612, "doll"], [452, 966, "paw"]],
+};
+// extra room for the bigger legend
+const MIN_H = { willow: 1180, grafton: 1050, brownstone: 1050, woodwind: 1080, tanglewood: 940, edgefield: 1040 };
+MAPS.forEach((m) => {
+  m.cursed = CURSED_SPOTS[m.id] || [];
+  if (MIN_H[m.id]) m.h = Math.max(m.h, MIN_H[m.id]);
+});
+
 const outDir = path.join(__dirname, "..", "maps");
 for (const m of MAPS) {
   fs.writeFileSync(path.join(outDir, `${m.id}.svg`), build(m));

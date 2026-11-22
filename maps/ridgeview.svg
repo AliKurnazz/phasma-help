@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2120 1010" width="2120" height="1010" font-family="Inter, Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2120 1060" width="2120" height="1060" font-family="Inter, Segoe UI, Arial, sans-serif">
   <defs>
     <symbol id="fuse" viewBox="0 0 28 28">
       <rect x="1.5" y="1.5" width="25" height="25" rx="5" fill="#2a2210" stroke="#f0b93a" stroke-width="2.5"/>
@@ -21,7 +21,7 @@
     </style>
   </defs>
 
-  <rect width="2120" height="1010" fill="#10151b"/>
+  <rect width="2120" height="1060" fill="#10151b"/>
 
   <text x="60" y="78" fill="#eef2f6" font-size="46" font-weight="700">10 Ridgeview Court</text>
   <text x="62" y="112" fill="#8d99a8" font-size="18">Small map · 3 floors</text>
@@ -57,6 +57,9 @@
     <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
     <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
     <text class="legend" x="42" y="163">Stairs</text>
+    <g><title>Summoning circle</title><circle cx="13" cy="200" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="13" y="201" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g><text class="legend" x="42" y="206">Cursed object spot</text>
+    <text class="legend" x="0" y="240" font-size="15">🔤 Ouija  ·  🎵 Music box  ·  🃏 Tarot  ·  🐒 Monkey paw</text>
+    <text class="legend" x="0" y="264" font-size="15">🪞 Mirror  ·  🪡 Voodoo doll  ·  ⭐ Summoning circle</text>
   </g>
 
   <!-- ================= 1ST FLOOR ================= -->
@@ -154,4 +157,9 @@
     <text class="lbl" x="1179" y="460">Girls</text><text class="lbl" x="1179" y="486">Bedroom</text>
     <text class="lbl" x="1400" y="460">Teen Boys</text><text class="lbl" x="1400" y="486">Bedroom</text>
   </g>
+
+  <!-- cursed possession spots -->
+  <g transform="translate(-270,-107)"><g><title>Summoning circle</title><circle cx="612" cy="520" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="612" y="521" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g></g>
+  <g transform="translate(-257,-107)"><g><title>Mirror</title><circle cx="993" cy="705" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="993" y="706" font-size="16" text-anchor="middle" dominant-baseline="middle">🪞</text></g><g><title>Ouija</title><circle cx="985" cy="812" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="985" y="813" font-size="16" text-anchor="middle" dominant-baseline="middle">🔤</text></g><g><title>Tarot</title><circle cx="1232" cy="893" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1232" y="894" font-size="16" text-anchor="middle" dominant-baseline="middle">🃏</text></g><g><title>Voodoo doll</title><circle cx="894" cy="815" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="894" y="816" font-size="16" text-anchor="middle" dominant-baseline="middle">🪡</text></g></g>
+  <g transform="translate(455,162)"><g><title>Monkey paw</title><circle cx="1252" cy="140" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1252" y="141" font-size="16" text-anchor="middle" dominant-baseline="middle">🐒</text></g><g><title>Music box</title><circle cx="1157" cy="428" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1157" y="429" font-size="16" text-anchor="middle" dominant-baseline="middle">🎵</text></g></g>
 </svg>

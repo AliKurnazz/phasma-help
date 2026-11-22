@@ -111,6 +111,13 @@
 <use href="#fuse" x="914" y="702" width="28" height="28"/>
 <use href="#fuse" x="1169" y="491" width="28" height="28"/>
 <use href="#fuse" x="928" y="969" width="28" height="28"/>
+<g><title>Ouija</title><circle cx="885" cy="518" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="885" y="519" font-size="16" text-anchor="middle" dominant-baseline="middle">🔤</text></g>
+<g><title>Music box</title><circle cx="921" cy="518" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="921" y="519" font-size="16" text-anchor="middle" dominant-baseline="middle">🎵</text></g>
+<g><title>Summoning circle</title><circle cx="957" cy="518" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="957" y="519" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g>
+<g><title>Voodoo doll</title><circle cx="993" cy="518" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="993" y="519" font-size="16" text-anchor="middle" dominant-baseline="middle">🪡</text></g>
+<g><title>Monkey paw</title><circle cx="1029" cy="518" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1029" y="519" font-size="16" text-anchor="middle" dominant-baseline="middle">🐒</text></g>
+<g><title>Mirror</title><circle cx="1065" cy="518" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1065" y="519" font-size="16" text-anchor="middle" dominant-baseline="middle">🪞</text></g>
+<g><title>Tarot</title><circle cx="1101" cy="518" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1101" y="519" font-size="16" text-anchor="middle" dominant-baseline="middle">🃏</text></g>
 <text class="lbl" font-size="20"><tspan x="462.5" y="566.0">Male Wing</tspan></text>
 <text class="lbl" font-size="15"><tspan x="135.5" y="459.4">Male</tspan><tspan x="135.5" y="476.6">Dorm</tspan></text>
 <text class="lbl" font-size="15"><tspan x="135.5" y="572.4">Male</tspan><tspan x="135.5" y="589.6">Day Room</tspan></text>
@@ -121,7 +128,6 @@
 <text class="lbl" font-size="12"><tspan x="588" y="497.1">Male</tspan><tspan x="588" y="510.9">2</tspan></text>
 <text class="lbl" font-size="12"><tspan x="645" y="497.1">Male</tspan><tspan x="645" y="510.9">1</tspan></text>
 <text class="lbl" font-size="20"><tspan x="956" y="337.5">Courtyard</tspan></text>
-<text class="lbl" font-size="20"><tspan x="1003" y="486.5">Chapel</tspan></text>
 <text class="lbl" font-size="10"><tspan x="813" y="515.0">Infirmary</tspan></text>
 <text class="lbl" font-size="14"><tspan x="955" y="562.0">Entrance Corridor</tspan></text>
 <text class="lbl" font-size="20"><tspan x="959.5" y="121.5">Kitchen</tspan></text>
@@ -178,13 +184,17 @@
 <text class="lbl" font-size="9"><tspan x="1498" y="855.3">Restricted</tspan><tspan x="1498" y="865.7">5</tspan></text>
 <text class="lbl" font-size="11"><tspan x="1565.5" y="854.2">Exam</tspan><tspan x="1565.5" y="866.8">Room</tspan></text>
 <text class="zone" font-size="15"><tspan x="955" y="232.0">Courtyard Corridor</tspan></text>
+<text class="zone" font-size="20"><tspan x="1003" y="466.0">Chapel</tspan></text>
 <text class="ft" x="86" y="400">GROUND FLOOR</text>
 <text class="ft" x="86" y="810">BASEMENT</text>
-<g transform="translate(1250,640)">
+<g transform="translate(1330,90)">
     <text x="0" y="0" class="ft" font-size="20">LEGEND</text>
     <use href="#fuse" x="0" y="22" width="26" height="26"/><text class="legend" x="42" y="42">Fuse box (possible spot)</text>
     <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
     <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
     <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
-    <text class="legend" x="42" y="163">Stairs</text></g>
+    <text class="legend" x="42" y="163">Stairs</text>
+    <g><title>Summoning circle</title><circle cx="13" cy="200" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="13" y="201" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g><text class="legend" x="42" y="206">Cursed object spot</text>
+    <text class="legend" x="0" y="240" font-size="15">🔤 Ouija  ·  🎵 Music box  ·  🃏 Tarot  ·  🐒 Monkey paw</text>
+    <text class="legend" x="0" y="264" font-size="15">🪞 Mirror  ·  🪡 Voodoo doll  ·  ⭐ Summoning circle</text></g>
 </g></svg>

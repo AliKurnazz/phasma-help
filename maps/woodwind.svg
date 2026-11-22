@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1050" width="1600" height="1050" font-family="Inter, Segoe UI, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1080" width="1600" height="1080" font-family="Inter, Segoe UI, Arial, sans-serif">
 <defs><symbol id="fuse" viewBox="0 0 28 28"><rect x="1.5" y="1.5" width="25" height="25" rx="5" fill="#2a2210" stroke="#f0b93a" stroke-width="2.5"/><path d="M16 4 L8 15 H13 L11 24 L20 12 H15 Z" fill="#f0b93a"/></symbol><style>
   .floor { fill: #1d2530; stroke: #d5dde7; stroke-width: 4; stroke-linejoin: round; }
   .outside { fill: #171d25; stroke: #5d6878; stroke-width: 2.5; stroke-linejoin: round; }
@@ -15,7 +15,7 @@
   .ft    { fill: #7fd8cd; font-size: 26px; font-weight: 700; letter-spacing: 2px; }
   .legend { fill: #c9d2dc; font-size: 18px; }
 </style></defs>
-<rect width="1600" height="1050" fill="#10151b"/>
+<rect width="1600" height="1080" fill="#10151b"/>
 <text x="60" y="78" fill="#eef2f6" font-size="46" font-weight="700">Camp Woodwind</text>
 <text x="62" y="112" fill="#8d99a8" font-size="18">Small map · outdoor campsite</text>
 <g transform="translate(0,0)">
@@ -35,6 +35,13 @@
 <rect class="furn" x="908" y="803" width="60" height="80" transform="rotate(10 938 843)"/>
 <line class="door" x1="987" y1="983" x2="1097" y2="983"/>
 <use href="#fuse" x="1319" y="387" width="28" height="28"/>
+<g><title>Voodoo doll</title><circle cx="1038" cy="245" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1038" y="246" font-size="16" text-anchor="middle" dominant-baseline="middle">🪡</text></g>
+<g><title>Monkey paw</title><circle cx="835" cy="330" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="835" y="331" font-size="16" text-anchor="middle" dominant-baseline="middle">🐒</text></g>
+<g><title>Music box</title><circle cx="590" cy="617" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="590" y="618" font-size="16" text-anchor="middle" dominant-baseline="middle">🎵</text></g>
+<g><title>Summoning circle</title><circle cx="1347" cy="500" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1347" y="501" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g>
+<g><title>Mirror</title><circle cx="995" cy="580" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="995" y="581" font-size="16" text-anchor="middle" dominant-baseline="middle">🪞</text></g>
+<g><title>Tarot</title><circle cx="822" cy="836" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="822" y="837" font-size="16" text-anchor="middle" dominant-baseline="middle">🃏</text></g>
+<g><title>Ouija</title><circle cx="1420" cy="818" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="1420" y="819" font-size="16" text-anchor="middle" dominant-baseline="middle">🔤</text></g>
 <text class="lbl" font-size="20" transform="rotate(8 1153 155)"><tspan x="1153" y="143.5">Red</tspan><tspan x="1153" y="166.5">Tent</tspan></text>
 <text class="lbl" font-size="20" transform="rotate(5 500 655)"><tspan x="500" y="643.5">Yellow</tspan><tspan x="500" y="666.5">Tent</tspan></text>
 <text class="lbl" font-size="20" transform="rotate(-8 788 510)"><tspan x="788" y="498.5">Blue</tspan><tspan x="788" y="521.5">Tent</tspan></text>
@@ -52,5 +59,8 @@
     <line class="door" x1="2" y1="80" x2="26" y2="80"/><text class="legend" x="42" y="86">Front door</text>
     <line class="win" x1="2" y1="118" x2="26" y2="118"/><text class="legend" x="42" y="124">Window</text>
     <rect class="stair" x="2" y="146" width="24" height="20"/><line class="tread" x1="10" y1="146" x2="10" y2="166"/><line class="tread" x1="18" y1="146" x2="18" y2="166"/>
-    <text class="legend" x="42" y="163">Stairs</text></g>
+    <text class="legend" x="42" y="163">Stairs</text>
+    <g><title>Summoning circle</title><circle cx="13" cy="200" r="15" fill="#2a1d3d" stroke="#c084fc" stroke-width="2.5"/><text x="13" y="201" font-size="16" text-anchor="middle" dominant-baseline="middle">⭐</text></g><text class="legend" x="42" y="206">Cursed object spot</text>
+    <text class="legend" x="0" y="240" font-size="15">🔤 Ouija  ·  🎵 Music box  ·  🃏 Tarot  ·  🐒 Monkey paw</text>
+    <text class="legend" x="0" y="264" font-size="15">🪞 Mirror  ·  🪡 Voodoo doll  ·  ⭐ Summoning circle</text></g>
 </g></svg>
