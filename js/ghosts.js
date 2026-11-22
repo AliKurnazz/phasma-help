@@ -251,6 +251,34 @@ const OBSERVATIONS = [
   { key: "breath",    label: "Saw freezing breath during a hunt",        only: ["Hantu", "The Mimic"] },
 ];
 
+// ---- Ghosts added in 2026 (sources still disagree on some numbers: verify in game) ----
+GHOSTS.push(
+  { name: "Kormos", evidence: ["orb", "box", "uv"], hunt: [50, 70], speed: [1.7, 2.21], los: false, tags: ["normal", "fast"], verify: true,
+    tells: ["Hears sprinting footsteps from far away, but barely sees you.",
+            "Can hunt at 70% if someone sprints in its room (50% otherwise).",
+            "Moves about 30% faster towards a spot where it heard you."],
+    tests: ["Sprint in the ghost room at high sanity: an early hunt (above 50%) points to Kormos.",
+            "During a hunt, stand still in plain view: it often walks past you."] },
+
+  { name: "Aswang", evidence: ["freezing", "writing", "dots"], hunt: [50, 70], speed: [1.5, 3.71], los: true, tags: ["normal", "fast"], verify: true,
+    tells: ["Speeds up with line of sight faster than any other ghost.",
+            "Can't kill you while you're inside an official hiding spot.",
+            "Faster at low sanity (about 1.5 → 2.25 m/s base)."],
+    tests: ["Watch how quickly it builds speed once it sees you: much faster than normal.",
+            "A player hiding in a proper hiding spot is never killed by it."] },
+
+  { name: "Deildegast", evidence: ["emf", "writing", "dots"], hunt: [50], speed: [0.4, 3.0], los: false, tags: ["slow", "normal", "fast"], verify: true,
+    tells: ["Starts hunts very fast (about 3 m/s).",
+            "Gets slower the more objects your team has moved or thrown.",
+            "Can end up much slower than a normal ghost."],
+    tests: ["Move and throw lots of items, then compare hunt speeds: fast early, slow later → Deildegast."] },
+);
+Object.assign(HUNT_TIPS, {
+  "Kormos": "Kormos: don't sprint. Walk quietly; it tracks sound much better than sight.",
+  "Aswang": "Aswang: get into a proper hiding spot (closet or locker); it can't kill you there.",
+  "Deildegast": "Deildegast: very fast unless your team has moved lots of objects. Throw things around before hunts.",
+});
+
 // Hunt filter buckets
 const HUNT_BUCKETS = [
   { key: "late",      label: "Late (<50%)",   test: (h) => h.some((v) => v < 50) },
