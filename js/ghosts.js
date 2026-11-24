@@ -104,8 +104,9 @@ const GHOSTS = [
   { name: "Banshee", evidence: ["uv", "orb", "dots"], hunt: [50], speed: N, los: true, tags: ["normal"],
     tells: ["Only checks its target's sanity for hunts and chases that one player.",
             "Unique scream on the parabolic microphone.",
-            "More singing ghost events."],
-    tests: ["Listen on the parabolic mic for the shriek.", "Note who it ignores during hunts."] },
+            "More singing ghost events.",
+            "Always female (name and model)."],
+    tests: ["Listen on the parabolic mic for the shriek.", "Note who it ignores during hunts.", "A male ghost name rules Banshee out."] },
 
   { name: "Jinn", evidence: ["emf", "uv", "freezing"], hunt: [50], speed: [1.7, 2.5], los: false, tags: ["normal", "fast"],
     tells: ["Never turns the fuse box off.",
@@ -145,7 +146,8 @@ const GHOSTS = [
   { name: "Oni", evidence: ["emf", "freezing", "dots"], hunt: [50], speed: N, los: true, tags: ["normal"],
     tells: ["More active with players nearby; shows itself more.",
             "Can't do the 'airball' (hissing mist) ghost event.",
-            "More visible during hunts (blinks less)."],
+            "More visible during hunts (blinks less).",
+            "Its ghost events drain 20% sanity (others 10%)."],
     tests: ["Seeing the airball event rules Oni out."] },
 
   { name: "Yokai", evidence: ["box", "orb", "dots"], hunt: [80, 50], speed: N, los: true, tags: ["normal"],
@@ -214,20 +216,26 @@ const GHOSTS = [
     tests: ["Ask the Ouija board its age repeatedly: rising age → Thaye.",
             "Activity and speed drop over the contract."] },
 
-  { name: "Gallu", evidence: ["emf", "box", "uv"], hunt: [40, 60], speed: [1.36, 2.8], los: true, tags: ["slow", "normal", "fast"], verify: true,
-    tells: ["Gets enraged by protective equipment (salt, crucifix, incense).",
-            "Enraged: faster and hunts at higher sanity; calm: slower."],
-    tests: ["Use protective items repeatedly and watch the hunt speed climb."] },
+  { name: "Gallu", evidence: ["emf", "box", "uv"], hunt: [40, 50, 60], speed: [1.36, 2.8], los: true, tags: ["slow", "normal", "fast"],
+    tells: ["Has 3 moods: normal (1.7 m/s, hunts at 50%), enraged (1.96 m/s, hunts at 60%) and weakened (1.36 m/s, hunts at 40%).",
+            "Gets enraged by protection: a burnt crucifix, incense, or stepping in salt (even tier I).",
+            "Enraged: no longer disturbs salt and its crucifix range is 2 m shorter. After an enraged hunt it becomes weakened."],
+    tests: ["Put several salt piles in its path: steps in the first, then stops stepping in the rest → Gallu.",
+            "Use a crucifix or incense, then compare: a faster next hunt points to Gallu."] },
 
-  { name: "Dayan", evidence: ["emf", "box", "orb"], hunt: [45, 60], speed: [1.2, 2.25], los: false, tags: ["slow", "normal", "fast"], verify: true,
-    tells: ["Reacts to player movement close to it.",
-            "Faster while you move nearby, slower if you stand still."],
-    tests: ["Stand still vs walk near it during a hunt and compare speed."] },
+  { name: "Dayan", evidence: ["emf", "box", "orb"], hunt: [45, 50, 65], speed: [1.2, 2.8], los: true, tags: ["slow", "normal", "fast"],
+    tells: ["Reacts to the nearest player within 10 m (even through floors).",
+            "If you move near her: fixed 2.25 m/s and hunts at 65%. Stand still: 1.2 m/s and hunts at 45%.",
+            "With nobody within 10 m it acts normal (50%, 1.7 m/s). Always female."],
+    tests: ["During a hunt, stand still near it, then walk: 1.2 → 2.25 m/s → Dayan.",
+            "A male ghost name rules Dayan out."] },
 
-  { name: "Obambo", evidence: ["uv", "writing", "dots"], hunt: [10, 65], speed: [1.45, 1.96], los: true, tags: ["slow", "normal", "fast"], verify: true,
-    tells: ["Switches between a calm and an aggressive state on a timer.",
-            "Calm: slower, hunts only at very low sanity. Aggressive: faster, hunts early."],
-    tests: ["Track activity over a few minutes: clear calm/aggressive phases."] },
+  { name: "Obambo", evidence: ["uv", "writing", "dots"], hunt: [10, 65], speed: [1.45, 2.8], los: true, tags: ["slow", "normal", "fast"],
+    tells: ["Switches between calm and aggressive every 2 minutes, even mid-hunt (first switch 1 min after the front door opens).",
+            "Calm: 1.45 m/s, hunts only at 10%. Aggressive: 1.96 m/s, hunts at 65%.",
+            "Hunts that start aggressive are 20% shorter."],
+    tests: ["Time a hunt that started fast: 20% shorter than normal → Obambo.",
+            "Footsteps switching slow ↔ fast mid-hunt for no reason."] },
 ];
 
 // Behaviour you saw → which ghosts it rules out.
@@ -238,7 +246,9 @@ const OBSERVATIONS = [
   { key: "breakeroff",label: "Ghost turned the fuse box OFF",            out: ["Jinn"] },
   { key: "breakeron", label: "Ghost turned the fuse box ON",             out: ["Hantu"] },
   { key: "lighton",   label: "Ghost turned a light ON",                  out: ["Mare"] },
-  { key: "airball",   label: "Saw the airball (mist) event",             out: ["Oni"] },
+  { key: "airball",   label: "Saw the airball (mist) event",             out: ["Oni", "Kormos"] },
+  { key: "male",      label: "The ghost is male (name, model or voice)", out: ["Banshee", "Dayan"] },
+  { key: "hidesafe",  label: "It found someone in a hiding spot and the hunt just ended", only: ["Aswang", "The Mimic"] },
   { key: "dotseye",   label: "Saw DOTS with your own eyes",              out: ["Goryo"] },
   { key: "inroom",    label: "Hunt started with someone in its room",    out: ["Shade"] },
   { key: "hunt55",    label: "Hunted above 50% sanity",                  minHunt: 51 },
@@ -251,32 +261,36 @@ const OBSERVATIONS = [
   { key: "breath",    label: "Saw freezing breath during a hunt",        only: ["Hantu", "The Mimic"] },
 ];
 
-// ---- Ghosts added in 2026 (sources still disagree on some numbers: verify in game) ----
+// ---- Ghosts added in 2026 (Alan Wake event v0.17 and v0.18). Numbers from Phasmopedia, game v0.19.0.2 ----
 GHOSTS.push(
-  { name: "Kormos", evidence: ["orb", "box", "uv"], hunt: [50, 70], speed: [1.7, 2.21], los: false, tags: ["normal", "fast"], verify: true,
-    tells: ["Hears sprinting footsteps from far away, but barely sees you.",
-            "Can hunt at 70% if someone sprints in its room (50% otherwise).",
-            "Moves about 30% faster towards a spot where it heard you."],
-    tests: ["Sprint in the ghost room at high sanity: an early hunt (above 50%) points to Kormos.",
-            "During a hunt, stand still in plain view: it often walks past you."] },
+  { name: "Kormos", evidence: ["orb", "box", "uv"], hunt: [50, 70], speed: [1.7, 2.21], los: false, tags: ["normal", "fast"],
+    tells: ["Nearly blind: only sees you within 5 m with nothing in between.",
+            "Hears footsteps on its floor: sprinting 30 m, walking 15 m, crouching 10 m. Heads there 30% faster (2.21 m/s).",
+            "Hunts at 70% if someone sprints in its room (50% otherwise). Never does the mist or chasing ghost events."],
+    tests: ["Stand still in an open area during a hunt: it walks close past you, then finds you as soon as you move → Kormos.",
+            "Sprint in the ghost room at high sanity: a hunt above 50% points to Kormos."] },
 
-  { name: "Aswang", evidence: ["freezing", "writing", "dots"], hunt: [50, 70], speed: [1.5, 3.71], los: true, tags: ["normal", "fast"], verify: true,
-    tells: ["Speeds up with line of sight faster than any other ghost.",
-            "Can't kill you while you're inside an official hiding spot.",
-            "Faster at low sanity (about 1.5 → 2.25 m/s base)."],
-    tests: ["Watch how quickly it builds speed once it sees you: much faster than normal.",
-            "A player hiding in a proper hiding spot is never killed by it."] },
+  { name: "Aswang", evidence: ["freezing", "writing", "dots"], hunt: [50], speed: [1.53, 2.53], los: true, tags: ["slow", "normal", "fast"],
+    tells: ["Starts slow (1.53 m/s) but speeds up with line of sight much faster than normal (2.53 m/s in ~9 s).",
+            "Can't kill you inside an official hiding spot: the hunt ends instantly.",
+            "If it found you hiding, its next hunt heads straight for that spot."],
+    tests: ["Hide in an official hiding spot: if it finds you and the hunt just ends → Aswang (risky: any other ghost kills you).",
+            "Slow start, then a very fast speed-up once it sees you."] },
 
-  { name: "Deildegast", evidence: ["emf", "writing", "dots"], hunt: [50], speed: [0.4, 3.0], los: false, tags: ["slow", "normal", "fast"], verify: true,
-    tells: ["Starts hunts very fast (about 3 m/s).",
-            "Gets slower the more objects your team has moved or thrown.",
-            "Can end up much slower than a normal ghost."],
-    tests: ["Move and throw lots of items, then compare hunt speeds: fast early, slow later → Deildegast."] },
+  { name: "Deildegast", evidence: ["emf", "writing", "dots"], hunt: [50], speed: [0.4, 3.0], los: false, tags: ["slow", "normal", "fast"],
+    tells: ["Starts at 3.0 m/s and loses 0.1 m/s for each different object your team moved outside hunts (min 0.4 m/s at 26).",
+            "The count resets after every hunt and when a crucifix burns. No line-of-sight speed-up.",
+            "Uses doors and light switches less often, and its interactions sometimes fail."],
+    tests: ["Move ~15 different objects before the next hunt: clearly slower → Deildegast.",
+            "First hunt with nothing moved: very fast footsteps (3 m/s) that don't speed up on sight."] },
 );
 Object.assign(HUNT_TIPS, {
-  "Kormos": "Kormos: don't sprint. Walk quietly; it tracks sound much better than sight.",
-  "Aswang": "Aswang: get into a proper hiding spot (closet or locker); it can't kill you there.",
-  "Deildegast": "Deildegast: very fast unless your team has moved lots of objects. Throw things around before hunts.",
+  "Kormos": "Kormos: don't sprint. Crouch or stand still; it's nearly blind and hunts by sound.",
+  "Aswang": "Aswang: get into an official hiding spot (closet or locker); it can't kill you there.",
+  "Deildegast": "Deildegast: very fast (up to 3 m/s) unless your team moved lots of objects before the hunt.",
+  "Gallu": "Gallu: don't spam protection: crucifix, incense and salt make it faster and hunt earlier.",
+  "Dayan": "Dayan: if it's near you, stand still: it drops to 1.2 m/s.",
+  "Obambo": "Obambo: hunts that start fast are 20% shorter. Just survive it.",
 });
 
 // Hunt filter buckets
@@ -286,3 +300,18 @@ const HUNT_BUCKETS = [
   { key: "early",     label: "Early (55-70%)",test: (h) => h.some((v) => v > 50 && v <= 70) },
   { key: "veryearly", label: "Very early (75%+)", test: (h) => h.some((v) => v >= 75) },
 ];
+
+// Latest Phasmophobia update, shown in the help dialog. Source: Kinetic Games news (official).
+const GAME_NEWS = {
+  title: "Resonance",
+  date: "Released 24 November 2026 · all platforms",
+  source: "https://www.kineticgames.co.uk/news/resonance-releasedate",
+  items: [
+    ["🗣", "Ghost voice commands", "Ask the ghost to use nearby doors and light switches, throw objects, or give a sign it's there. The phrases you can use are on a new Journal page. Also works in Text mode (VR players: via the sanity watch)."],
+    ["🦴", "Dowsing Rods (new equipment)", "Help you find the Bone, mainly on big maps like Brownstone High School. Tier 1 points in the general direction; Tier 3 is much more accurate, including which floor."],
+    ["🎙", "Sound Sensor rework", "Its map now shows what kind of sound it picked up: looping sounds stay a while, single sounds ping once. Only sounds on your floor show. You can use it to judge the ghost's speed during a hunt."],
+    ["🗺", "Map pool", "Pick as many maps as you like for a random pool, with quick buttons for small, medium and large maps. The dice picks a random map."],
+    ["⚙", "Unity 6, lighting and settings", "Better performance and many bug fixes, improved lighting, graphics presets, an extreme shadow setting, and colour-blind options. Xbox Play Anywhere support."],
+  ],
+  note: "No new ghosts and no ghost or evidence changes were announced. Full patch notes come out at launch.",
+};

@@ -260,3 +260,28 @@
 
   window.PHExtras = { openHunt, openLearn };
 })();
+
+// Latest game update (from GAME_NEWS in ghosts.js) in the help / settings dialog.
+(() => {
+  const box = document.getElementById("game-news");
+  if (!box || typeof GAME_NEWS === "undefined") return;
+  const mk = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  const head = mk("div", "news-head");
+  head.append(mk("h2", null, "Game update: " + GAME_NEWS.title), mk("span", "news-date", GAME_NEWS.date));
+  box.append(head);
+  const ul = mk("ul", "news-list");
+  GAME_NEWS.items.forEach(([icon, title, text]) => {
+    const li = mk("li");
+    li.append(mk("span", "news-icon", icon));
+    const body = mk("div");
+    body.append(mk("b", null, title), mk("p", null, text));
+    li.append(body);
+    ul.append(li);
+  });
+  box.append(ul);
+  const note = mk("p", "hint", GAME_NEWS.note + " ");
+  const a = mk("a", null, "Official announcement");
+  a.href = GAME_NEWS.source; a.target = "_blank"; a.rel = "noopener";
+  note.append(a);
+  box.append(note);
+})();
